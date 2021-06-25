@@ -14003,11 +14003,6 @@ jo9zqG5t8Q/qPM5Q0zZP5o2Bwi4w66jhn//Z
   &lt;!-- previous login errors --&gt;
   #error($services.localization.render($message))
 #end
-#set($authFailureStrategyMessage = $services.security.authentication.getErrorMessage($request.j_username))
-#if ("$!authFailureStrategyMessage" != '')
-  #error($authFailureStrategyMessage)
-#end
-#set ($supplementaryForm = $services.security.authentication.getForm($request.j_username))
 &lt;dl&gt;
   &lt;dt&gt;
     &lt;label for="j_username"&gt;$services.localization.render('username')&lt;/label&gt;
@@ -14016,7 +14011,7 @@ jo9zqG5t8Q/qPM5Q0zZP5o2Bwi4w66jhn//Z
     #end
   &lt;/dt&gt;
   &lt;dd class="input-group"&gt;
-    &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('user')&lt;/span&gt;
+    &lt;span class="input-group-addon"&gt;&lt;span class="glyphicon glyphicon-user"&gt;&lt;/span&gt;&lt;/span&gt;
     &lt;input class="form-control" type="text" id="j_username" size="60" name="j_username" value="" tabindex="100"/&gt;
   &lt;/dd&gt;
   &lt;dt&gt;
@@ -14026,7 +14021,7 @@ jo9zqG5t8Q/qPM5Q0zZP5o2Bwi4w66jhn//Z
     #end
   &lt;/dt&gt;
   &lt;dd class="input-group"&gt;
-    &lt;span class="input-group-addon"&gt;$services.icon.renderHTML('lock')&lt;/span&gt;
+    &lt;span class="input-group-addon"&gt;&lt;span class="glyphicon glyphicon-lock"&gt;&lt;/span&gt;&lt;/span&gt;
     &lt;input type="password" id="j_password" size="60" name="j_password" value="" tabindex="200"/&gt;
   &lt;/dd&gt;
   &lt;dt&gt;&lt;/dt&gt;
@@ -14035,11 +14030,6 @@ jo9zqG5t8Q/qPM5Q0zZP5o2Bwi4w66jhn//Z
       &lt;input id="rememberme" type="checkbox" name="j_rememberme" value="true" tabindex="300"/&gt; $services.localization.render('remembermeonthiscomp')
     &lt;/label&gt;
   &lt;/dd&gt;
-  #if ("$!supplementaryForm" != "")
-    &lt;div id="dedicated-auth-failures-field"&gt;
-      $supplementaryForm
-    &lt;/div&gt;
-  #end
   &lt;dt&gt;&lt;input type="submit" class="btn btn-primary col-xs-12" value="$services.localization.render('login')" tabindex="400"/&gt;&lt;/dt&gt;
 &lt;/dl&gt;
 #xwikimessageboxend()
@@ -14047,7 +14037,7 @@ jo9zqG5t8Q/qPM5Q0zZP5o2Bwi4w66jhn//Z
 &lt;/div&gt;## mainContentArea
 &lt;/div&gt;## main
 ## Ensure that the username field of the login form has the focus to make it easy for users to log in quickly
-&lt;script&gt;
+&lt;script type="text/javascript"&gt;
 //&lt;![CDATA[
   document.forms.loginForm.j_username.focus();
 //]]&gt;

@@ -812,7 +812,7 @@
     <className>FlamingoThemesCode.ThemeClass</className>
     <guid>d7a1e9c0-531b-4b7b-bdbb-17c4c5bc3f4a</guid>
     <property>
-      <body-bg>#FFFFFF</body-bg>
+      <body-bg>#F5F5F5</body-bg>
     </property>
     <property>
       <brand-danger>#CC3333</brand-danger>

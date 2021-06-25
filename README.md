@@ -14,7 +14,7 @@ Ce projet a été financé par le Ministère de l'Écologie, de l'Énergie, du D
 
 This project is an XWiki application, which means that it needs to be installed on top of a running instance of the XWiki Platform. See https://www.xwiki.org/xwiki/bin/view/Download/ about how to get and configure such an instance. Note: during this installation you may be asked to create an administrator account. For ideal results with the current application, you should choose ```Admin``` as the account name for this administrator account (case sensitive).
 
-The code of this branch was briefly validated for XWiki Standard version 12.10.8, the current LTS version of the XWiki project. The original development of this application was done using XWiki Standard version 8.2.1 as base. The code compatible with the 8.2.1 version of XWiki can be found on the dedicated 8.2.1 branch.
+The code of this branch is the original code developed on XWiki Standard version 8.2.1, validated and tested using that version of XWiki as base. The code compatible the latest LTS version of XWiki Standard (12.10.8) can be found on the main branch.
 
 ## Building the sources
 
@@ -26,8 +26,9 @@ The following artefacts will result from the build and will be used for the inst
 ## Installation prerequisites
 
 Besides the modules described above, for the proper functioning of the application, a couple of extensions need to be installed on the XWiki platform before the installation of the modules above. This can be done from the Administration of the wiki, the "Extensions" section (see documentation of this section here https://extensions.xwiki.org/xwiki/bin/view/Extension/Extension%20Manager%20Application ).
-* The Blog application, version ```8.2.1```. The simplest way to install this version is by using the "Advanced search" feature of the Extension manager and typing in the extension id and version: ```org.xwiki.contrib.blog:application-blog-ui``` , version ```8.2.1```.
+* The Blog application, version ```8.2.1```. This application is bundled with version 8.2.1 of XWiki Standard and should already be installed on the instance.
   * The blog category ```Blog.Personal``` should be deleted from the blog after installation of the application.
+* The Menu application, version 8.2.1. The simplest way to install this version is by using the "Advanced search" feature of the Extension manager and typing in the extension id and version: ```org.xwiki.platform:xwiki-platform-menu-ui``` , version ```8.2.1``` .
 * The Mocca Calendar application, version 2.5.3. The simplest way to install this version is by using the "Advanced search" feature of the Extension manager and typing in the extension id and version: ```org.xwiki.contrib:application-mocca-calendar-ui``` , version ```2.5.3``` .
   * The pages ```MoccaCalendar.Events``` and ```MoccaCalendar.MoccaCalendarTemplate``` should be deleted after the installation of this extension .
 

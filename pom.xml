@@ -38,8 +38,8 @@
   <scm>
     <connection>scm:git:git@github.com:globalclimateaction/globalclimateaction-network.git</connection>
     <developerConnection>scm:git:git@github.com:globalclimateaction/globalclimateaction-network.git</developerConnection>
-    <url>https://github.com/globalclimateaction/globalclimateaction-network/tree/main</url>
-    <tag>HEAD</tag>
+    <url>https://github.com/globalclimateaction/globalclimateaction-network/tree/xwiki-8.2.1</url>
+    <tag>xwiki-8.2.1</tag>
   </scm>
   <developers>
     <developer>
