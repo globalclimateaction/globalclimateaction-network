@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="MoccaCalendar.NextEventsMacro" locale="">
+  <web>MoccaCalendar</web>
+  <name>NextEventsMacro</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>Main.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>NextEventsMacro</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>MoccaCalendar.NextEventsMacro</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>dc740538-8d51-4857-b418-e533eba15056</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>require(['jquery'], function ($) {
+  $(document).ready(function() {
+    // search for the div ov the next-events macro
+    var container = $('.nextevents-container');
+    if (!container) {
+      return;
+    }
+    // grab the information from the data attributes
+    var filterType = container.attr('data-filter');
+    var calendarDoc = container.attr('data-calendarDoc');
+    var count = parseInt(container.attr('data-count'));
+    if (typeof(filterType) != 'undefined' &amp;&amp; typeof(calendarDoc) != 'undefined' &amp;&amp; typeof(count) != 'undefined') {
+      // prepare the parameters for the ajax
+      var today = new Date();
+      var startDate = "" + today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay();
+      var endDate = "" + (today.getFullYear() + 10) + '-' + today.getMonth() + '-' + today.getDay();
+      var ajaxParams = {'classname' : 'MoccaCalendar.MoccaCalendarEventClass',
+                        'startfield' : 'startDate', 'endfield' : 'endDate', 'durationfield' : '',
+                        'outputView' : 'plainList', 'calendarDoc' : calendarDoc, 'filter' : filterType,
+                        'start' : startDate, 'end' : endDate, '_' : today.getTime()};
+      var ajaxURL = "$escapetool.javascript($xwiki.getURL('MoccaCalendar.JSONService', 'get', '&amp;xpage=plain&amp;outputSyntax=plain'))";
+      $.ajax(ajaxURL, {
+        data: ajaxParams,
+        success : function(result) {
+          container.removeClass('loading');
+          var displayedItems = 0;
+          // somehow works like this, but I don't know why...
+          $(result).each(function(item, value){
+            if (displayedItems &lt; count) {
+              container.append(value.html);
+              displayedItems++;
+            }
+          });
+        },
+        error : function () {
+          container.append("&lt;div class='box warningmessage gcaa-notready'&gt;$escapetool.javascript($services.localization.render('MoccaCalendar.calendar.loaderror'))&lt;/div&gt;");
+          container.removeClass('loading');
+        }
+      });
+    }
+  });
+});</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>MoccaCalendar.NextEventsMacro</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>7f795c01-4af1-439f-b1f0-1d91c59f7d75</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>#template('colorThemeInit.vm')
+
+.nextevents-container {
+  /* Make it play nice in content and distance from surrounding elements like a list or a paragraph would to */
+  margin-bottom: 10px;
+  &amp;.loading {
+    min-height: 50px;
+  }
+  .moccaevent {
+    margin-bottom: 1em;
+    margin-top: 1em;
+    border-left-width: 2px;
+    border-left-style: solid;
+    padding-left: 15px;
+    &amp;:first-of-type {
+      margin-top: 0;
+    }
+    &amp;:last-of-type {
+      margin-bottom: 0;
+    }
+    h5 {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-family: @font-family-base;
+      font-size: @font-size-base;
+      text-transform: none;
+      /* This here is trying to fix a setting from the generic h5 styling which makes this h5 too small vertically compared to its content, and the consequence of that is too narrow display */
+      line-height: 1.25;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 0.85em;
+      display: block;
+      font-size: 85%;
+      color: $theme.textSecondaryColor;
+    }
+  }
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <code>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>code</name>
+        <number>9</number>
+        <picker>0</picker>
+        <prettyName>Macro code</prettyName>
+        <rows>20</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentDescription>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>contentDescription</name>
+        <number>8</number>
+        <picker>0</picker>
+        <prettyName>Content description (Not applicable for "No content" type)</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </contentDescription>
+      <contentType>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>7</number>
+        <picker>0</picker>
+        <prettyName>Macro content type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>Optional|Mandatory|No content</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <defaultCategory>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultCategory</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Default category</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultCategory>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>Macro description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <id>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>id</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Macro id</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </id>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Macro name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <supportsInlineMode>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>supportsInlineMode</name>
+        <number>5</number>
+        <prettyName>Supports inline mode</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </supportsInlineMode>
+      <visibility>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>visibility</name>
+        <number>6</number>
+        <picker>0</picker>
+        <prettyName>Macro visibility</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>Current User|Current Wiki|Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </visibility>
+    </class>
+    <name>MoccaCalendar.NextEventsMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>b08eff5a-1500-4fcd-bb55-a579dde459b6</guid>
+    <property>
+      <code>{{velocity}}
+## grab the parameters of the macro
+#set($filter = $xcontext.macro.params.filter)
+#if(!$filter)
+  #set($filter = 'page') ## possible values are wiki, space, page
+#end
+#set($calendarDoc = $xcontext.macro.params.calendarDoc)
+#if(!$calendarDoc)
+  #set($calendarDoc = $doc.fullName)
+#end
+#set($count = 5)
+#if ("$!xcontext.macro.params.count" != '')
+  ## parse the count
+  #set($count = $numbertool.toNumber("$!xcontext.macro.params.count"))
+  #if(!$count)
+    #set($count = 5)
+  #end
+#end
+## this macro is loading its content asynchronously, it just puts the data in a html and loads the content after
+#set($discard = $xwiki.jsx.use("$xcontext.macro.doc"))
+#set($discard = $xwiki.ssx.use("$xcontext.macro.doc"))
+(%data-filter="$filter" data-calendarDoc="$calendarDoc" data-count="$count" class="nextevents-container loading"%)((( )))
+{{/velocity}}</code>
+    </property>
+    <property>
+      <contentDescription/>
+    </property>
+    <property>
+      <contentType>No content</contentType>
+    </property>
+    <property>
+      <defaultCategory/>
+    </property>
+    <property>
+      <description>Displays the next calendar events, as an agenda (list).</description>
+    </property>
+    <property>
+      <id>nextevents</id>
+    </property>
+    <property>
+      <name>Next calendar events</name>
+    </property>
+    <property>
+      <supportsInlineMode>0</supportsInlineMode>
+    </property>
+    <property>
+      <visibility>Current Wiki</visibility>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>MoccaCalendar.NextEventsMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>98ff0179-2fd0-4595-9da7-4b2da55c5167</guid>
+    <property>
+      <defaultValue>page</defaultValue>
+    </property>
+    <property>
+      <description>Possible values are 'wiki','space' or 'page', where:
+ 'page': only events which are children pages of this page will be included,
+ 'space': only events which are in the space of the calendar doc will be included,
+ 'wiki': all events will be included.</description>
+    </property>
+    <property>
+      <mandatory/>
+    </property>
+    <property>
+      <name>filter</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>MoccaCalendar.NextEventsMacro</name>
+    <number>1</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>c4f3ca2c-3015-4c8a-b062-ed93e034380f</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The calendar document whose events are shown (only if filter is set to 'page'). This value is also used as the default calendar to create new events for. If missing, the current document is used.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>calendarDoc</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>MoccaCalendar.NextEventsMacro</name>
+    <number>2</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>8f0697a3-2080-46e7-a987-28c801e369c4</guid>
+    <property>
+      <defaultValue>5</defaultValue>
+    </property>
+    <property>
+      <description>How many events should be displayed</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>count</name>
+    </property>
+  </object>
+  <content> </content>
+</xwikidoc>

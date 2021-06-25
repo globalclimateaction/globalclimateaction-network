@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="SectorCode.SectorMenuPanel" locale="">
+  <web>SectorCode</web>
+  <name>SectorMenuPanel</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>Panels.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>Panels.PanelClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <category>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>category</name>
+        <number>5</number>
+        <prettyName>Category</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>Information|Navigation|Tools|Administration|Other</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </category>
+      <content>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>content</name>
+        <number>4</number>
+        <prettyName>Content</prettyName>
+        <rows>25</rows>
+        <size>120</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </content>
+      <description>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>3</number>
+        <prettyName>Description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>type</name>
+        <number>2</number>
+        <prettyName>Panel type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>view|edit</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </type>
+    </class>
+    <name>SectorCode.SectorMenuPanel</name>
+    <number>0</number>
+    <className>Panels.PanelClass</className>
+    <guid>3d04f5cf-04fe-4864-8632-e8d43806b025</guid>
+    <property>
+      <category>Information</category>
+    </property>
+    <property>
+      <content>{{velocity}}
+#set($discard = $xwiki.ssx.use('SectorCode.SectorMenuPanel'))
+#set($currentSectorDoc = $NULL)
+## start looking for the sector from the top to the bottom, as it has more chances of being closer to the top
+#foreach($spRef in $doc.documentReference.spaceReferences)
+  #set($parentDoc = $xwiki.getDocument($services.model.createDocumentReference('WebHome', $spRef)))
+  #if ("$!currentSectorDoc" == '' &amp;&amp; $parentDoc.getObject('SectorCode.SectorClass'))
+    #set($currentSectorDoc = $parentDoc)
+  #end
+#end
+## only display this panel for pages under a sector
+#if ("$!currentSectorDoc" != '')
+  #panelheader($currentSectorDoc.title)
+  #set($currentSectorSpace = $services.model.serialize($currentSectorDoc.documentReference.lastSpaceReference, 'compact'))
+  {{menu type="vertical collapsible"}}
+* $services.icon.render('home') $services.localization.render('sector.menu.presentation')
+#foreach($presPage in ['Context', 'Roadmap', 'QuickWins'])
+  ** [[$services.localization.render("sector.home.${presPage}.title")&gt;&gt;${currentSectorSpace}.${presPage}]]
+#end
+* [[$services.icon.render('rss') $services.localization.render('sector.menu.blog')&gt;&gt;${currentSectorSpace}.Blog.WebHome]]
+* [[$services.icon.render('lightbulb') $services.localization.render('sector.menu.initiatives')&gt;&gt;${currentSectorSpace}.Initiatives.WebHome]]
+* (%class="gcaa-notready"%)$services.icon.render('book') $services.localization.render('sector.menu.kb')
+* (%class="gcaa-notready"%)$services.icon.render('comments') $services.localization.render('sector.menu.forum')
+* [[$services.icon.render('calendar') $services.localization.render('sector.menu.agenda')&gt;&gt;${currentSectorSpace}.Agenda.WebHome]]
+## generate a groups administration menu, only for users having rights to edit the groups
+#set($sectorGroupsDocuments = ["SectorResponsiblesGroup", "SectorEditorsGroup", "InitiativesResponsiblesGroup"])
+#set($editableSectorGroupsDocuments = [])
+#foreach ($sgDocName in $sectorGroupsDocuments)
+  #if ($xwiki.hasAccessLevel('edit', $xcontext.user, "${currentSectorSpace}.${sgDocName}"))
+    #set($discard = $editableSectorGroupsDocuments.add($sgDocName))
+  #end
+#end
+#if ($editableSectorGroupsDocuments.size() &gt; 0)
+  * $services.icon.render('group') $services.localization.render("sector.menu.groups")
+  #foreach($edSGDocName in $editableSectorGroupsDocuments)
+    ** [[$services.localization.render("sector.menu.groups.${edSGDocName}")&gt;&gt;${currentSectorSpace}.${edSGDocName}]]
+  #end
+  ## add a link to register a new user as well, if the groups are displayed
+  #if($xwiki.hasAccessLevel('register', $xcontext.user, 'Main.WebHome'))
+    ** [[$services.localization.render("sector.menu.newuser")&gt;&gt;path:$xwiki.getURL('XWiki.XWikiRegister', 'register')]]
+  #end
+#end
+  {{/menu}}
+  #panelfooter()
+#end
+{{/velocity}}</content>
+    </property>
+    <property>
+      <description>The panel containing the menu for the sector</description>
+    </property>
+    <property>
+      <name>SectorMenuPanel</name>
+    </property>
+    <property>
+      <type>view</type>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>SectorCode.SectorMenuPanel</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>26c79fb4-d5a3-4faa-8d64-65a58a7f99fe</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>// Panel Mixins
+// Title menu color
+// i created this var to prevent the case when the variable navbar-default-bg be different with the panel title color
+@title-panel-color:@navbar-default-bg; 
+
+// Panel border color
+@panel-border-color:#E9E9E9;
+
+// End Panel Mixins
+
+
+.panel{
+  &amp;.SectorMenuPanel {
+    border: 1px solid @panel-border-color;
+    border-top: 0;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    h1.xwikipaneltitle {
+      background: @headings-color;
+      margin: 0;
+      padding: 12px 10px;
+      text-align: center;
+      color: @title-panel-color;
+      font-size: 23px;
+      font-weight: 400;
+      border: none;
+      margin: 0 -1px;
+    }
+    .xwikipanelcontents{
+      padding: 12px 15px 15px;
+    }
+    .menu-vertical&gt;ul&gt;li {
+      border-bottom: 1px solid #CCCCCC;
+      padding: 8px 10px !important;
+      color: #666666;
+      font-size: 16px;
+      &amp;:hover{
+        background: transparent;
+      }
+      &amp;&gt;ul.xDropdown-menu {
+        border-top: 5px solid @gcaa-orange;
+        background-color: lighten(@gcaa-orange, 45%);
+        margin: 8px -10px 0;
+        padding: 5px;
+      }
+    }
+    .menu.menu-vertical .xDropdown-toggle:hover {
+      background-color: transparent;
+    }
+    .menu.menu-vertical .xDropdown-toggle:after {
+      right: 0;
+      margin: 0 !important;
+      top: 8px;
+      right: 0;
+     }
+     .menu.menu-vertical .xDropdown-toggle::after{
+       margin: -10px 6px 0 0 !important;
+       top: 8px;
+       content: "\f107";
+       border: 0;
+       display: inline-block;
+       font: normal normal normal 14px/1 FontAwesome;
+       font-size: inherit;
+       text-rendering: auto;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       font-size: 26px;
+    }
+    .menu.menu-vertical .open .xDropdown-toggle::after{
+       content: "\f106";
+       color: @gcaa-orange;
+    }
+    .menu-vertical&gt;ul&gt;li.xDropdown.open {
+      padding-bottom: 0 !important;
+    }
+    ul.xDropdown-menu&gt;li {
+      line-height: 1em;
+      padding: 2px 5px !important;
+    }
+    a{
+       color: #666666;
+    }
+    ul li li a{
+      font-size: 14px;
+    }
+    /* Correct the alignment of menu items because fa-icons don't have fixed width so we'll make it fixed.
+     * Normally it's possible in some version of FA, with a class, but then our icon service needs to support it. */
+    span.fa {
+      min-width: 16px; /* This is not enough for all icons, but it's reasonable, then it's too much */
+      text-align: center;
+    }
+  }
+}
+</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name>Panel Menu Stylesheet</name>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <content/>
+</xwikidoc>

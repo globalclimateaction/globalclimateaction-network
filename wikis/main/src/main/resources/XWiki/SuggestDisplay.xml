@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="XWiki.SuggestDisplay" locale="">
+  <web>XWiki</web>
+  <name>SuggestDisplay</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>XWiki.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1451602800000</creationDate>
+  <date>1451602800000</date>
+  <contentUpdateDate>1451602800000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.0</syntaxId>
+  <hidden>false</hidden>
+  <object>
+    <class>
+      <name>XWiki.JavaScriptExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>5</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>2</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>4</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>3</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>XWiki.SuggestDisplay</name>
+    <number>0</number>
+    <className>XWiki.JavaScriptExtension</className>
+    <guid>3a967d58-9ffe-4e71-80e1-c95022a4a697</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>var XWiki = (function (XWiki) {
+  var widgets = XWiki.widgets = XWiki.widgets || {};
+  // -------------------------------
+  // In XWiki 5.2 SuggestPicker already exists, it's created in suggestPicker already so we rename this one to SuggestDisplayPicker
+  // TODO: rewrite this using the real suggest picker!
+  // -------------------------------
+  widgets.SuggestDisplayPicker = Class.create({
+  
+  initialize: function(element) {
+    this.input = element;
+    // get the referer input to pass it to the suggest script
+    var suggestRefererInput = this.input.previous("input[name=" + this.input.readAttribute('name') + "Referer]");
+    this.input.writeAttribute('onfocus', this.input.readAttribute('onfocus').replace(/^/, 'return this._x_suggest = '));
+    var original_onfocus = this.input.onfocus;
+    this.input.onfocus = function() {
+      this.suggest = original_onfocus.apply(this.input);
+      this.suggest.options.timeout = 5000;
+      this.suggest.options.callback = this.addItem.bind(this);
+      /* add the requester here, to get the suggests in context */
+      if (suggestRefererInput) {
+        this.suggest.options.script = this.suggest.options.script + "&amp;refererdoc=" + encodeURIComponent(suggestRefererInput.getValue()) + "&amp;";
+      }
+    }.bind(this);
+    
+    if (this.input.previous('input[type=hidden]')) {
+      this.element = this.input.previous('input[type=hidden]')
+    } else {
+      this.element = this.setupSuggest(this.input);
+    }
+    
+    /* get the force add button, if any. If there is one, add a click listener that adds the value in the input and an enter listener for the input */
+    this.button = $(this.element.readAttribute('id') + "_addbutton");
+    if (this.button) {
+      this.button.observe('click', function (event) {
+        this.addItem({'value' : this.input.getValue()});
+      }.bindAsEventListener(this));
+      
+      this.input.observe('keyup', function(event) {
+        var key = event.keyCode;
+        switch(key) {
+          case Event.KEY_RETURN:
+             event.stop();
+             this.addItem({'value' : this.input.getValue()});
+        }
+      }.bindAsEventListener(this));
+
+      this.button.toggleClassName('hidden');
+      this.input.toggleClassName('suggested-withaddbutton');
+    }
+
+    this.list = new Element('ul', {'class' : 'picker-list'});
+    if (this.button) {
+      this.button.insert({'after' : this.list});
+    } else {
+      this.input.insert({'after' : this.list});
+    }
+
+    this.prepareList();
+    this.input.value = "";
+    
+    // Insert the new entry button
+    if (this.inEditItemsMode($(element).up(0))) {
+       this.insertNewEntryBtn(element);
+    }
+  },
+  
+  prepareList : function() {
+    var inputName = this.element.readAttribute('name');
+    var valuesSelect = this.element.previous("select[name=" + inputName + "_suggestValues]");
+    if (valuesSelect) {
+      valuesSelect.select('option').each(function(selectedValueOption){
+        if (selectedValueOption.selected) {
+          this.addLi(selectedValueOption.readAttribute('label'), selectedValueOption.readAttribute('value'));
+        }
+      }.bind(this));
+      Element.remove(valuesSelect);
+    }
+
+    // disable this element so that only values displayed in hidden inputs in the list are submitted, not the value of the suggest input too
+    this.element.writeAttribute('disabled', 'disabled');
+    // add an empty hidden input with the name of the prop at the end of the list, to trick the fromValue() to believe that there are more values
+    // so that it doesn't parse the first value as a list value, with | as separator or some other tricky separator
+    var hiddenEmptyElt = new Element('input', {'type' : 'hidden', 'name' : inputName});
+    this.list.insert({'after': hiddenEmptyElt});
+    
+    // Create a drag and drop for the options list to be able to change order
+    var listId = inputName + "_suggestPicker";
+    this.list.writeAttribute('id', listId);
+    // we call it here for good: even if the previous addLi's triggered it, it wouldn't have worked since the list doesn't have an id yet.
+    // so how it will actually setup a sortable.
+    this.setupDragDrop();
+  },
+  
+  setupDragDrop : function() {
+    var listId = this.list.readAttribute('id');
+    if (listId &amp;&amp; listId != "") {
+      Sortable.create(listId, {
+        handle: 'picker-item', 
+        overlap: 'vertical', 
+        scroll: window, 
+        dropOnEmpty: true, 
+        constraint: false,
+        ghosting: false,
+        hoverclass: 'picker-item-hover-highlight',
+      });
+    }
+  },
+  
+  /* Sets up the combination for the suggest to work properly, with a hidden field that keeps the keys and a visible field that holds the values */
+  /* FIXME: I think this function is a bit wrong, but it's not gonna be used though, so it should be fine. */
+  setupSuggest: function(input) {
+    var inputName = input.readAttribute('name');
+    var inputId = input.readAttribute('id');
+    var hiddenInput = new Element('input', {'type' : 'hidden', 'name': inputName, 'value': input.readAttribute('value'), 'id' : inputId});
+    input.insert({before : hiddenInput});
+    input.writeAttribute('name', inputName + "_suggest");
+    input.writeAttribute('id', inputId + "_suggest");
+    
+    return hiddenInput;
+  },
+
+  addItem : function(obj) {
+    this.addLi(obj.info || obj.value, obj.value);
+    // FIXME: this is now useless the update list. Since the element is disabled anyway, we rely on the hidden inputs added in the list elements
+    this.updateList.bind(this).defer();
+    return false;
+  },
+
+  addLi : function(key, value) {
+    if (!key) {
+      return;
+    }
+    var li = document.createElement("li");
+    var span = new Element('span', {'title' : key}).update(value.escapeHTML());
+    span.className = "picker-item";
+    var hiddenInputName = this.element.readAttribute('name');
+    var hiddenInput = new Element('input', {'type' : 'hidden', 'name' : hiddenInputName, 'value' : key});
+    li._x_value = key;
+    var img = new Element('span', {'class' : 'deleteImg', 'title' : "$escapetool.javascript($services.localization.render('delete'))"}).update("$escapetool.javascript($services.icon.renderHTML('cross'))");
+    img.observe('click', this.removeItem.bindAsEventListener(this));
+    li.appendChild(span);
+    li.appendChild(hiddenInput);
+    // Add the edit button
+    if (this.inEditItemsMode($(this.list).up(0))) {
+        // var editImg = new Element("img",{'src': "$xwiki.getSkinFile('icons/silk/page_white_edit.png')"});
+        var editImg = new Element('span', {'class':'editImg'}).update("$escapetool.javascript($services.icon.renderHTML('page_white_edit'))");
+        editImg.observe('click', this.editItem.bindAsEventListener(this));
+        li.appendChild(editImg);
+    }
+    li.appendChild(img);
+    
+    if (this.inEditItemsMode($(this.list).up(0))) {
+       if(this.list.getElementsByClassName("newEntryLi").length &gt; 0){
+          var newEntryLi = this.list.getElementsByClassName("newEntryLi")[0];
+          this.list.insertBefore(li,newEntryLi);
+       }
+       else
+       {
+          this.list.appendChild(li);
+       }
+    }
+    else
+    {
+       this.list.appendChild(li);
+    }
+    
+    // re-setup the list drag and drop so that the new element can also be moved
+    this.setupDragDrop();
+  },
+
+  // Check if in items editable mode
+  inEditItemsMode : function(elem) {
+    return Element.select(elem, '.inEditItemsMode').length &gt; 0;
+  },
+
+  editItem : function(event) {
+    var li = event.findElement('li');
+    var input = li.select("input[type='hidden']");
+    var itemDocRef = input[0].value;
+    // Get item class name and property name
+    require(['jquery'],function($) {
+       var className = $("input[type='hidden'][id$='_className']",$(li).parent().parent()).eq(0).val();
+       var propertyName = $("input[type='hidden'][id$='_propertyName']",$(li).parent().parent()).eq(0).val();
+       var wiki = $("input[type='hidden'].currentWiki",$(li).parent().parent()).eq(0).val();
+       var editURL = "$xwiki.getURL("XWiki.SuggestDisplayEditItems",'view','xpage=plain')";
+       editURL = editURL + '&amp;itemDocRef=' + wiki + ':' + itemDocRef + '&amp;action=editItem' + "&amp;className=" + className + "&amp;propertyName=" + propertyName;
+       // Remove popup old content before showing it
+       $('.xdialog-modal-container.suggestDisplayEditItemModal').remove();
+       new XWiki.widgets.EditModePopup({pageURL: editURL});
+    });
+  },
+  insertNewEntryBtn : function(element) {
+     require(['jquery'],function($){
+       // Insert the create new entry icon after the last item of the items selected list
+       var lastSelectedItem = $('ul.picker-list li:last',$(element).parent());
+       if(lastSelectedItem.length &gt; 0){
+         $( '&lt;li class="newEntryLi"&gt;&lt;a href="javascript:;" class="newEntryBtn"&gt;' + 
+            '$services.icon.renderHTML('add') $services.localization.render('platform.appwithinminutes.appHomePageAddEntryHint')&lt;/a&gt;&lt;/li&gt;'
+          ).insertAfter(lastSelectedItem);
+       }
+       else
+       {
+          $('ul.picker-list',$(element).parent()).append('&lt;li class="newEntryLi"&gt;&lt;a href="javascript:;" class="newEntryBtn"&gt;' +
+            '$services.icon.renderHTML('add') $services.localization.render('platform.appwithinminutes.appHomePageAddEntryHint')&lt;/a&gt;&lt;/li&gt;'
+          );
+       }
+     });
+  },
+  
+  removeItem : function(event) {
+    var item = event.findElement('li');
+    item.remove();
+    this.updateList();
+  },
+
+  updateList : function() {
+    this.input.value = "";
+    this.element.value = this.list.select('li').collect(function(item) { return item._x_value; }).join('|');
+  }
+});
+  return XWiki;
+}(XWiki || {}));</code>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>XWiki.SuggestDisplay</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>a1e2109f-b6e5-46bf-90fa-44ba7a916baf</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>.suggested-addbutton {
+  background: none;
+  border: none;
+  padding: 0 !important;
+  line-height: normal ! important;
+}
+
+.xform input.suggested-withaddbutton {
+  width: 87%;
+}
+
+.picker-list img {
+  vertical-align: top; /* I don't know why top, seems to look better than middle which is too low (though it makes more sense)*/
+}
+
+.picker-list span.deleteImg, .picker-list span.editImg {
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+ul.picker-list {
+  margin-top: 0.5em;
+}
+
+ul.picker-list .picker-item {
+  cursor: move;
+}</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name>Suggest list css</name>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <content>{{velocity}}
+#set ($propertyClass = $object.getxWikiClass().get($name))
+#set ($pickerId = "${prefix}${name}")
+##
+##
+#if ($type == 'edit')
+  #set($discard = $xwiki.jsfx.use("js/scriptaculous/effects.js"))
+  #set($discard = $xwiki.jsfx.use("js/scriptaculous/dragdrop.js"))
+  ## ---------------------------------
+  ## We load this script non-deferred because we changed the way we setup the 
+  ## suggest picker (we do it in the page instead of the jsx), 
+  ## so we cannot be sure anymore that the picker is defined by the time it is called in this page, 
+  ## as xwiki:dom:loading is fired potentially before the loading of deferred scripts.
+  ## ---------------------------------
+  #set($discard = $xwiki.jsx.use('xwiki:XWiki.SuggestDisplay', {'defer' : false }))
+  ##
+  #set($discard = $xwiki.ssx.use('xwiki:XWiki.SuggestDisplay', {'minify' : false}))
+  ## render a select with the current selection
+  {{html clean="false"}}
+    #if ($value.size() &gt; 0)
+      &lt;select id="${pickerId}_suggestValues" name="${pickerId}_suggestValues" multiple="multiple" class="hidden"&gt;
+    #end
+    #foreach($k in $value)
+      #if ($propertyClass.getMapValues().containsKey($k))
+        #set ($v = $propertyClass.getMapValues().get($k).value)
+      #else
+        #set ($v = $k)
+      #end
+      ## ---------------------------------
+      ## users : Display first name and last name instead of username
+      ## ---------------------------------
+      #if($isUser)
+        #set($userObj = $xwiki.getDocument($v).getObject('XWiki.XWikiUsers'))
+        #if($userObj)
+          #set($k = $v)
+          #set($v = $userObj.getProperty('first_name').value + ' ' + $userObj.getProperty('last_name').value)
+        #end
+      #end
+
+      &lt;option label="$escapetool.xml($k)" value="$escapetool.xml($v)" selected="selected" /&gt;
+    #end
+    #if ($value.size() &gt; 0)
+      &lt;/select&gt;
+    #end
+    ## set this variable to force the send of a requester to the suggest vm, to force the generation of the suggestions depending on the current document. Needs support in suggest.vm
+    #if ($needsContextualSuggest)
+      &lt;input type="hidden" name="${pickerId}_suggestReferer" value="$object.name" /&gt;
+    #end
+    ## now display the item in edit mode, to have the suggest and all.
+    $doc.displayEdit($propertyClass, $prefix, $object)
+
+    ## Save the className and the class property name in hidden picker (In editItemInPopups mode)
+    #if("$!SuggestDisplayItemsEditable" != '' &amp;&amp; $SuggestDisplayItemsEditable == true)
+       ## New js/css calls
+       #set($discard = $xwiki.ssx.use("XWiki.SuggestDisplayEditItems"))
+       #set($discard = $xwiki.jsx.use("XWiki.SuggestDisplayEditItems"))
+       #set($attachmentPickerDocName = 'XWiki.AttachmentSelector')
+       #set($discard = $xwiki.ssx.use($attachmentPickerDocName))
+       #set($discard = $xwiki.jsx.use($attachmentPickerDocName))
+       ## Wysiwyg
+       #set($lazy = true)
+       #wysiwyg_import($lazy)
+       ## Date picker : TODO
+       &lt;input type="hidden" id="${prefix}_className" value="$object.getxWikiClass().getName()"/&gt;
+       &lt;input type="hidden" id="${prefix}_propertyName" value="$name"/&gt;
+       &lt;input type="hidden" id="itemParent" value="$doc.getDocumentReference()"/&gt;
+       #if("$!SuggestDisplayEditModeSpace" != '')
+       &lt;input type="hidden" id="itemSpace" value="$!SuggestDisplayEditModeSpace"/&gt;
+       #else
+       &lt;input type="hidden" id="itemSpace" value="$doc.getSpace()"/&gt;
+       #end
+       &lt;input type="hidden" class="inEditItemsMode" value="1"/&gt;
+       &lt;input type="hidden" class="currentWiki" value="$services.wiki.currentWikiId"/&gt;
+    #end
+    
+    ## --------------------------------
+    ## This multiple suggest feature overwrites simple select suggest
+    ## -&gt; call multi suggest for current obj &amp; prop
+    ## --------------------------------
+    &lt;script type="text/javascript"&gt;
+        document.observe('xwiki:dom:loading', function() {
+          var suggestInput = $('${prefix}${name}');
+          if(!suggestInput.hasClassName('suggested')) {
+            suggestInput = $('${prefix}${name}_suggest');
+          }
+          new XWiki.widgets.SuggestDisplayPicker(suggestInput);
+        });
+    &lt;/script&gt;
+
+    #if($displayAddButton)
+      &lt;button id="${prefix}${name}_addbutton" class="suggested-addbutton hidden" type="button" title="$escapetool.xml($services.localization.render('add'))"&gt;$services.icon.renderHTML('add')&lt;/button&gt;
+    #end
+  {{/html}}
+#else
+  #foreach($v in $value)
+    #if ($propertyClass.getMapValues().containsKey($v))
+      #set ($title = $propertyClass.getMapValues().get($v).value)
+    #else
+      #set ($title = $v)
+    #end
+    #if($valueIsDoc)
+      ## use html macro to make sure that no wiki syntax is interpreted in the title
+      #if($velocityCount &gt; 1), #{end}{{html}}&lt;a href="$xwiki.getURL(${v})"&gt;${title}&lt;/a&gt;{{/html}}##
+    #elseif($valueIsLink || $valueIsExternalLink)
+      [[{{{${title}}}}&gt;&gt;path:${v}#if($valueIsExternalLink)||rel="__blank"#end]]
+    ## ---------------------------------
+    ## users : Display first name and last name instead of username
+    ## ---------------------------------
+    #elseif($isUser)
+      {{html}}
+      #if($isUserWithLink)
+        $xwiki.getUserName($v, true)
+      #else
+        $xwiki.getUserName($v, false)
+      #end{{/html}}
+
+    #else
+      #if($velocityCount &gt; 1), #{end}${title}##
+    #end
+  #end
+#end
+{{/velocity}}</content>
+</xwikidoc>

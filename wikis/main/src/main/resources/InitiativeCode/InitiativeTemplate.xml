@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="InitiativeCode.InitiativeTemplate" locale="">
+  <web>InitiativeCode</web>
+  <name>InitiativeTemplate</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>InitiativeClass</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>InitiativeCode.InitiativeClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <countries>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay>{{velocity}}
+#if ($type == 'edit')
+  {{include document="XWiki.SuggestDisplay" /}}
+#else
+  #foreach($i in $value)#if($velocityCount &gt; 1), #end[[$xwiki.getDocument("Geo.${i}").title&gt;&gt;Geo.$i]]#end
+#end
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <idField/>
+        <multiSelect>1</multiSelect>
+        <name>countries</name>
+        <number>13</number>
+        <picker>1</picker>
+        <prettyName>Countries</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql>select doc.name, doc.title from XWikiDocument doc, BaseObject obj where obj.name = doc.fullName and obj.className = 'Geo.Code.CountryClass' and doc.space = 'Geo' order by doc.title</sql>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </countries>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>6</number>
+        <picker>0</picker>
+        <prettyName>Description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <details>
+        <customDisplay>{{include reference="AppWithinMinutes.Content"/}}</customDisplay>
+        <disabled>0</disabled>
+        <name>details</name>
+        <number>11</number>
+        <prettyName>Details</prettyName>
+        <script/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+      </details>
+      <focalPoint>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>focalPoint</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Focal Point</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>6</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <usesList>1</usesList>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </focalPoint>
+      <launchDate>
+        <customDisplay>{{include reference="AppWithinMinutes.DateDisplayer" /}}</customDisplay>
+        <dateFormat>dd/MM/yyyy</dateFormat>
+        <disabled>0</disabled>
+        <emptyIsToday>0</emptyIsToday>
+        <name>launchDate</name>
+        <number>8</number>
+        <picker>1</picker>
+        <prettyName>Launch date</prettyName>
+        <size>20</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.DateClass</classType>
+      </launchDate>
+      <leader>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>leader</name>
+        <number>5</number>
+        <picker>0</picker>
+        <prettyName>Initiative Leader</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>6</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <usesList>1</usesList>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.UsersClass</classType>
+      </leader>
+      <leadingOrganisations>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay>{{velocity display="false"}}
+  #set($displayAddButton = true)
+{{/velocity}}
+
+{{include document="XWiki.SuggestDisplay" /}}</customDisplay>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <idField/>
+        <multiSelect>1</multiSelect>
+        <name>leadingOrganisations</name>
+        <number>2</number>
+        <picker>1</picker>
+        <prettyName>Leading Organisations</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </leadingOrganisations>
+      <name>
+        <customDisplay>{{include reference="AppWithinMinutes.Title"/}}</customDisplay>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Name</prettyName>
+        <script/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+      </name>
+      <organisations>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay>{{velocity display="false"}}
+  #set($displayAddButton = true)
+{{/velocity}}
+
+{{include document="XWiki.SuggestDisplay" /}}</customDisplay>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <idField/>
+        <multiSelect>1</multiSelect>
+        <name>organisations</name>
+        <number>3</number>
+        <picker>1</picker>
+        <prettyName>Organisations</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </organisations>
+      <progress>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>checkbox</displayType>
+        <multiSelect>1</multiSelect>
+        <name>progress</name>
+        <number>15</number>
+        <picker>0</picker>
+        <prettyName>progress</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>1_objectives|2_roadmap|3_tracking|4_progress|5_impact|6_reporting|7_successes|8_join</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </progress>
+      <recognized>
+        <customDisplay/>
+        <defaultValue>0</defaultValue>
+        <disabled>0</disabled>
+        <displayFormType>radio</displayFormType>
+        <displayType>yesno</displayType>
+        <name>recognized</name>
+        <number>10</number>
+        <prettyName>GCAA Recognized</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </recognized>
+      <regions>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay>{{velocity}}
+#if ($type == 'edit')
+  {{include document="XWiki.SuggestDisplay" /}}
+#else
+  #foreach($i in $value)#if($velocityCount &gt; 1), #end[[$xwiki.getDocument("Geo.${i}").title&gt;&gt;Geo.$i]]#end
+#end
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <displayType>input</displayType>
+        <idField/>
+        <multiSelect>1</multiSelect>
+        <name>regions</name>
+        <number>14</number>
+        <picker>1</picker>
+        <prettyName>Regions</prettyName>
+        <relationalStorage>1</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql>select doc.name, doc.title from XWikiDocument doc, BaseObject obj where obj.name = doc.fullName and obj.className = 'Geo.Code.RegionClass' and doc.space = 'Geo' order by doc.title</sql>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </regions>
+      <sector>
+        <cache>0</cache>
+        <classname/>
+        <customDisplay>{{velocity}}
+#if ($type == 'view')
+  #if ("$!value" != '')
+    #set($sectorDoc = $xwiki.getDocument("${value}.WebHome"))
+    [[$sectorDoc.title&gt;&gt;$value]]
+  #end
+#else
+  #set($objClass = $object.getxWikiClass())
+  {{html clean="false"}}$doc.displayEdit($objClass.get($name), $prefix, $object){{/html}}
+#end
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <idField/>
+        <multiSelect>0</multiSelect>
+        <name>sector</name>
+        <number>12</number>
+        <picker>0</picker>
+        <prettyName>Sector</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators/>
+        <size>1</size>
+        <sort>none</sort>
+        <sql>select doc.space, doc.title from XWikiDocument doc, BaseObject obj where obj.name=doc.fullName and obj.className = 'SectorCode.SectorClass' and doc.space like 'Sectors.%' order by doc.title</sql>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <valueField/>
+        <classType>com.xpn.xwiki.objects.classes.DBListClass</classType>
+      </sector>
+      <status>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>status</name>
+        <number>9</number>
+        <picker>0</picker>
+        <prettyName>Status</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>announced=Announced|started=Started|finished=Finished|cancelled=Cancelled|inactive=Inactive</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </status>
+      <website>
+        <customDisplay>{{velocity}}
+## display an input in edit mode instead of a textarea
+#if ($type == 'edit')
+  {{html clean="false"}}
+    &lt;input type="text" name="${prefix}${name}" value="$!escapetool.xml($value)" /&gt;
+  {{/html}}
+#else
+  #set($objClass = $object.getxWikiClass())
+  {{html clean="false"}}$doc.displayView($objClass.get($name), $prefix, $object){{/html}}
+#end
+{{/velocity}}</customDisplay>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>website</name>
+        <number>7</number>
+        <picker>0</picker>
+        <prettyName>Website</prettyName>
+        <rows>1</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </website>
+    </class>
+    <name>InitiativeCode.InitiativeTemplate</name>
+    <number>0</number>
+    <className>InitiativeCode.InitiativeClass</className>
+    <guid>c0e628cc-7042-4841-93e2-f783b9f27a28</guid>
+    <property>
+      <description> </description>
+    </property>
+    <property>
+      <focalPoint/>
+    </property>
+    <property>
+      <launchDate/>
+    </property>
+    <property>
+      <leader/>
+    </property>
+    <property>
+      <leadingOrganisations/>
+    </property>
+    <property>
+      <organisations/>
+    </property>
+    <property>
+      <recognized>0</recognized>
+    </property>
+    <property>
+      <sector/>
+    </property>
+    <property>
+      <status/>
+    </property>
+    <property>
+      <website/>
+    </property>
+  </object>
+  <content>{{box cssClass="third-right"}}{{toc /}}{{/box}}
+
+= Short and long-term objectives =
+
+{{info}}What are the quantitative, qualitative and operational objectives of your initiative?{{/info}}
+
+//Text goes here.//
+
+= Roadmap and work plan =
+
+{{info}}Do you have a precise roadmap and work plan to achieve these objectives?{{/info}}
+
+//Text goes here.//
+
+= Tracking progress =
+
+{{info}}**How are you tracking progress of your initiative?** Is your tracking strategy also addressing concrete impact or results of the initiative on the ground and if so, how?{{/info}}
+
+//Text goes here.//
+
+= Progress since the start of the initiative =
+
+{{info}}**Please mention progress** that has been made by your initiative against the roadmap and workplan, what objectives have been achieved and highlight the most significant results. Please describe the actions undertaken by your initiative in 2016, since COP21.{{/info}}
+
+//Text goes here.//
+
+= Achieved impact and outcomes =
+
+{{info}}Your initiative may have already achieved quantitative outcomes across the three main pillars of the Paris Agreement (mitigation, adaptation and finance). If enough progress has been made since the start of the initiative to quantify this impact, please provide the details for the three sub-questions below.{{/info}}
+
+== Tracking adaptation progress (quantitative) ==
+
+{{info}}**Achieved impacts** to date?
+Please state change compared to a historic year, or to how the present would have been without your action.{{/info}}
+
+//Text goes here.//
+
+== Tracking mitigation progress (quantitative) ==
+
+{{info}}**Achieved impacts** to date?
+Please state change compared to a historic year, or to how the present would have been without your action (please use the unit MtCO,,2eq,,).{{/info}}
+
+//Text goes here.//
+
+== Tracking finance progress (quantitative) ==
+
+{{info}}**Achieved impacts** to date?
+Please state the amount of finance that has been deployed compared to a historic year.{{/info}}
+
+//Text goes here.//
+
+= Reporting =
+
+{{info}}**Is there any publically available reporting of your Initiative?
+If yes, with what frequency? Please provide a link to a webpage.{{/info}}
+
+//Text goes here.//
+
+= Could you mention one or two success stories achieved by your initiative? =
+
+//Text goes here.//
+
+= Joining your initiative =
+
+{{info}}How is it possible to join your initiative?{{/info}}
+
+//Text goes here.//</content>
+</xwikidoc>

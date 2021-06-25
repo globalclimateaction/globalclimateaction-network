@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="XWiki.TitleBannerMacro" locale="">
+  <web>XWiki</web>
+  <name>TitleBannerMacro</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>Main.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>TitleBannerMacro</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>XWiki.TitleBannerMacro</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>26b06c38-2cf8-4c5a-9385-b49f6054e4c4</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>## find out some things about the context of the rendering and render depending on these parameters
+## by default without image
+#set($withImage = false)
+#if("$!request.getParameter('withimage')" == 'true')
+  #set($withImage = true)
+#end
+
+/** Position properly the text over the image **/
+div.titlebanner {
+  position: relative;
+}
+
+div.titlebanner .titlebanner-textcontainer {
+  color: white;
+  display: block;
+  text-align: center;
+
+  /* Don't overlap at all on the image on mobile, so that we still see a little bit of the image */
+}
+
+div.titlebanner .titlebanner-title {
+  background-color: #85B800;
+  font-weight: bold;
+  vertical-align: middle;
+
+  padding: 5px 15px;
+}
+
+div.titlebanner h1.titlebanner-title {
+  margin: 0;
+  /* Repeat color setting here, otherwise the h1 does not inherit it from the parent as it's set explicitly in the skin */
+  color: white;
+}
+
+div.titlebanner .titlebanner-subtitle {
+  background-color: rgba(61, 152, 215, 0.9);
+  font-family: 'Roboto Condensed';
+  font-weight: bold;
+  vertical-align: middle;
+
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* On mobile titles are one under the other, on sm they're one next to the other */
+/* I don't use LESS here for the media query because apparently velocity and less it's either one or the other, sometimes a wrong result, without velocity, gets generated, so I will avoid less */
+@media (min-width:768px) {
+  div.titlebanner .titlebanner-textcontainer {
+    ## if we don't have an image, don't push up the overlap container
+    #if ($withImage)
+      position: absolute;
+      bottom: 0;
+    #end
+  }
+  div.titlebanner .titlebanner-title {
+    display: table-cell;
+
+    font-size: 34px; /* Size of the title of the page if displayed */
+    padding: 15px 30px;
+  }
+  div.titlebanner .titlebanner-subtitle {
+    display: table-cell;
+
+    font-size: 23px; /* ~ size of heading 3 */
+    padding: 15px 20px;
+  }
+}
+
+/*And remove some standard elements */
+/* Hide the line after the document header + the title in the doc header */
+.xcontent &gt; hr, 
+.xcontent .document-header .document-info {
+  display: none;
+}
+
+/* And reposition the document menu over the image */
+/* First, position the document header so that document menu positions relative to the header */
+.xcontent .document-header {
+  position: relative;
+}
+.xcontent .document-header .document-menu {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 400;
+}
+
+## if we don't have an image, there is no colored background for this menu, so display it in its original color
+#if($withImage)
+  .xcontent .document-header #contentmenu .dropdown &gt; a {
+      color: white;
+  }
+#end</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <code>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>code</name>
+        <number>9</number>
+        <picker>0</picker>
+        <prettyName>Macro code</prettyName>
+        <rows>20</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentDescription>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>contentDescription</name>
+        <number>8</number>
+        <picker>0</picker>
+        <prettyName>Content description (Not applicable for "No content" type)</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </contentDescription>
+      <contentType>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>7</number>
+        <picker>0</picker>
+        <prettyName>Macro content type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>Optional|Mandatory|No content</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <defaultCategory>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultCategory</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Default category</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultCategory>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>Macro description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <id>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>id</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Macro id</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </id>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Macro name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <supportsInlineMode>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>supportsInlineMode</name>
+        <number>5</number>
+        <prettyName>Supports inline mode</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </supportsInlineMode>
+      <visibility>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>visibility</name>
+        <number>6</number>
+        <picker>0</picker>
+        <prettyName>Macro visibility</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>Current User|Current Wiki|Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </visibility>
+    </class>
+    <name>XWiki.TitleBannerMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>1e1f91db-da33-4a75-a96d-79eb967d3577</guid>
+    <property>
+      <code>{{velocity}}
+#set($titleToDisplay = "$!xcontext.macro.params.title")
+#if ($titleToDisplay)
+  #set($titleToDisplay = $doc.displayTitle)
+#end
+#set($subtitle = "$!xcontext.macro.params.subtitle")
+#set($imageUrl = "$!xcontext.macro.params.imageUrl")
+#if ("$!xcontext.macro.params.image" != '')
+  #set($imageReference = $services.model.resolveAttachment("$!xcontext.macro.params.image", $doc.documentReference))
+  #set($imageUrl = $xwiki.getURL($imageReference))
+#end
+## prepare parameters for the CSS
+#set($cssParams = {})
+{{html clean="false"}}
+  &lt;div class="titlebanner"&gt;
+    &lt;div class="titlebanner-banner"&gt;
+      #if ($imageUrl != '')
+        &lt;img src="$escapetool.xml($imageUrl)" alt="$escapetool.xml($titleToDisplay)" width="100%" /&gt;
+        #set($discard = $cssParams.put('withimage', 'true'))
+      #end
+    &lt;/div&gt;
+    &lt;div class="titlebanner-textcontainer"&gt;
+      &lt;h1 class="titlebanner-title"&gt;$titleToDisplay&lt;/h1&gt;
+      #if ($subtitle != '')
+        &lt;div class="titlebanner-subtitle"&gt;$subtitle&lt;/div&gt;
+      #end
+    &lt;/div&gt;
+  &lt;/div&gt;
+{{/html}}
+#set($discard = $xwiki.ssx.use("$!xcontext.macro.doc.fullName", $cssParams))
+{{/velocity}}</code>
+    </property>
+    <property>
+      <contentDescription/>
+    </property>
+    <property>
+      <contentType>No content</contentType>
+    </property>
+    <property>
+      <defaultCategory/>
+    </property>
+    <property>
+      <description>Displays a title on a banner, with a subtitle option, while hiding the standard page title and re-locating the page action buttons to overlap the image.
+Only one such macro can be used on the page, and it should be the first thing rendered in the page.</description>
+    </property>
+    <property>
+      <id>titlebanner</id>
+    </property>
+    <property>
+      <name>Title Banner</name>
+    </property>
+    <property>
+      <supportsInlineMode/>
+    </property>
+    <property>
+      <visibility>Current Wiki</visibility>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>XWiki.TitleBannerMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>b66e252a-c03c-4e4f-a79b-e371d0b103b7</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The title to display, defaults to current document's title if not specified. Cannot be skipped.</description>
+    </property>
+    <property>
+      <mandatory/>
+    </property>
+    <property>
+      <name>title</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>XWiki.TitleBannerMacro</name>
+    <number>1</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>804e8b9b-132d-43a3-bc62-570e15330e58</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The subtitle to display, if empty no subtitle will be displayed.</description>
+    </property>
+    <property>
+      <mandatory/>
+    </property>
+    <property>
+      <name>subtitle</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>XWiki.TitleBannerMacro</name>
+    <number>2</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>d8628662-2667-4229-b201-03b0dbcb8495</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The image to display as banner - as an URL. Will be displayed as wide as the screen and as high as it gets (proportional to this width). The image can be missing (empty string), in which case only title and subtitle will be displayed. If both this and imageUrl are specified, then the image parameter wins.</description>
+    </property>
+    <property>
+      <mandatory/>
+    </property>
+    <property>
+      <name>imageUrl</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>XWiki.TitleBannerMacro</name>
+    <number>3</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>7ac6d890-87c6-45ab-81ca-4c091bb49723</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The image to display as banner - as XWiki reference. Will be displayed as wide as the screen and as high as it gets (proportional to this width). The image can be missing (empty string), in which case only title and subtitle will be displayed. If both this and imageUrl are specified, then this parameter wins.</description>
+    </property>
+    <property>
+      <mandatory/>
+    </property>
+    <property>
+      <name>image</name>
+    </property>
+  </object>
+  <content/>
+</xwikidoc>

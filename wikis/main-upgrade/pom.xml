@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xwiki.projects.gcaa</groupId>
+    <artifactId>xwiki-gcaa-wikis</artifactId>
+    <version>2.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>xwiki-gcaa-wikis-main-upgrade</artifactId>
+  <packaging>xar</packaging>
+  <name>XWiki Projects - GCAA - Wikis - Main - Upgrade</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.xwiki.projects.gcaa</groupId>
+      <artifactId>xwiki-gcaa-wikis-main</artifactId>
+      <version>${project.version}</version>
+      <type>xar</type>
+      <scope>provided</scope>
+   </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.xwiki.commons</groupId>
+        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
+        <version>${xwiki.version}</version>
+        <configuration>
+          <includeDependencies>true</includeDependencies>
+          <excludes>
+            <!-- We need this since we're overwriting default excludes> -->
+            <exclude>**/META-INF/**</exclude>
+            <!-- Exclude all the content pages, added because they are referred by the menu -->
+            <exclude>**/COP/WebHome.xml</exclude>
+            <exclude>**/COP.COP21/WebHome.xml</exclude>
+            <exclude>**/COP.COP22/WebHome.xml</exclude>
+            <exclude>**/Main.About/WebHome.xml</exclude>
+            <exclude>**/Main.About/LegalNotice.xml</exclude>
+            <exclude>**/Main.About.FAQ/WebHome.xml</exclude>
+            <!-- Exclude default groups -->
+            <exclude>**/XWiki/AllSectorResponsiblesGroup.xml</exclude>
+            <exclude>**/XWiki/ChampionsGroup.xml</exclude>
+            <exclude>**/XWiki/ViewersGroup.xml</exclude>
+            <exclude>**/XWiki/WebsiteResponsiblesGroup.xml</exclude>
+            <!-- Exclude default preferences -->
+            <exclude>**/XWiki/XWikiPreferences.xml</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

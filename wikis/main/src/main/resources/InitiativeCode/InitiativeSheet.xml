@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="InitiativeCode.InitiativeSheet" locale="">
+  <web>InitiativeCode</web>
+  <name>InitiativeSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>InitiativeClass</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>InitiativeCode.InitiativeSheet</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>4e379b3e-329b-4bf4-ba95-2610bab9f1df</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>/* 
+ * Edit mode
+ */
+.suggested-addbutton:hover {
+  color: green;
+}
+
+ul.picker-list span.deleteImg:hover {
+  color: #cc3333;
+}
+
+/*
+ * View mode
+ */
+.initiative-content {
+  margin-top: 20px;
+}
+.textcz(@clr){
+    color: @clr;
+}
+.radiusbox(@val){
+  border-radius: @val;
+  -moz-border-radius: @val;
+  -webkit-border-radius: @val;
+  -ms-border-radius: @val;
+}
+.left-pan{
+  background: #F5F5F5;
+  padding: 15px 0;
+  margin: 0 0 15px;
+  dd{
+    .textcz(#666);
+    p {
+      margin-bottom: 0;
+    }
+  }
+  dl dt{ 
+    label{
+      .textcz(#666);
+    }
+  }
+  .bottom-view {
+    padding-top: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-top: 1px solid #DDDDDD;
+  }
+  
+}
+.right-pan{
+  padding: 15px;
+  border: 1px solid #DDDDDD;
+  background: transparent;
+  .profil-item {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    .user .user-avatar-wrapper img {
+      max-height: 60px;
+      max-width: 60px;
+      .radiusbox(50%);
+    }
+    .accepted-suggestions .user, .suggestItem .user, .users .user {
+      padding-left: 75px;
+    }
+    li.user:hover {
+      background-color: transparent !important;
+    }
+    .user .user-avatar-wrapper {
+      height: 60px;
+      width: 60px;
+      margin-top: -22px;
+    }
+    label{
+      padding-left: 75px;
+      margin-bottom: 0;
+    } 
+  }
+  dl dt {
+    margin-top: 15px;
+  }
+  dl dt label,dl dd {
+    .textcz(#666);
+  }
+  dd p {
+    margin-bottom: 0;
+  }
+  &amp; &gt; dl:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  /* floated toc is floated only when screen is at least tablet, because otherwise it's too small . On mobile, toc is full width*/
+  .initiative-content .box.third-right {
+    width: 33.3333%;
+    margin-left: 15px;
+    float: right;
+  }
+
+  .initiative-content .box.third-left {
+    width: 33.3333%;
+    margin-right: 15px;
+    float: left;
+  }
+}
+
+.initiative-content .box.third-right &gt; ul, .initiative-content .box.third-left &gt; ul {
+  padding-left: 21px;
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <content>{{velocity}}
+{{html wiki="true"}}
+#set($discard = $xwiki.ssx.use('InitiativeCode.InitiativeSheet'))
+#set ($discard = $doc.use('InitiativeCode.InitiativeClass'))
+#set($initiativeObject = $doc.getObject('InitiativeCode.InitiativeClass'))
+#set($initiativeClass = $initiativeObject.getxWikiClass())
+(% class="xform" %)
+(((
+  #if ($xcontext.display == 'edit')
+    (%class="column full"%)(((
+      ; &lt;label for="InitiativeCode.InitiativeClass_0_name"&gt;$escapetool.xml($doc.displayPrettyName('name', false, false))&lt;/label&gt;
+      : $doc.display('name')
+    )))
+  #end
+  (%class="row"%)(((
+    (%class="col-xs-12 col-sm-8"%) (((
+      (%class="row left-pan"%)(((
+        (%class="col-xs-12 col-sm-6"%) (((
+          ; &lt;label for="InitiativeCode.InitiativeClass_0_description"&gt;$escapetool.xml($doc.displayPrettyName('description', false, false))&lt;/label&gt;
+          : $doc.display('description')
+          ; &lt;label for="InitiativeCode.InitiativeClass_0_website"&gt;$escapetool.xml($doc.displayPrettyName('website', false, false))&lt;/label&gt;
+          : $doc.display('website')
+        )))
+        (%class="col-xs-12 col-sm-6"%)(((
+          ; &lt;label for="InitiativeCode.InitiativeClass_0_regions"&gt;$escapetool.xml($doc.displayPrettyName('regions', false, false))&lt;/label&gt;
+          : $doc.display('regions')
+          ; &lt;label for="InitiativeCode.InitiativeClass_0_countries"&gt;$escapetool.xml($doc.displayPrettyName('countries', false, false))&lt;/label&gt;
+          : $doc.display('countries')
+        )))
+        (%class="col-xs-12"%) ((( 
+          (% class="bottom-view" %)
+          ; &lt;label for="InitiativeCode.InitiativeClass_0_leadingOrganisations"&gt;$escapetool.xml($doc.displayPrettyName('leadingOrganisations', false, false))&lt;/label&gt;
+          : $doc.display('leadingOrganisations')
+          ; &lt;label for="InitiativeCode.InitiativeClass_0_organisations"&gt;$escapetool.xml($doc.displayPrettyName('organisations', false, false))&lt;/label&gt;
+          : $doc.display('organisations')
+        )))
+      )))
+    )))
+    (%class="col-xs-12 col-sm-4"%) (((
+      (%class="right-pan"%) (((
+      (%class="profil-item"%) (((
+      ; &lt;label for="InitiativeCode.InitiativeClass_0_focalPoint"&gt;$escapetool.xml($doc.displayPrettyName('focalPoint', false, false))&lt;/label&gt;
+      : $doc.display('focalPoint')
+      )))
+      (%class="profil-item"%) (((
+      ; &lt;label for="InitiativeCode.InitiativeClass_0_leader"&gt;$escapetool.xml($doc.displayPrettyName('leader', false, false))&lt;/label&gt;
+      : $doc.display('leader')
+      ))) 
+      ; &lt;label for="InitiativeCode.InitiativeClass_0_status"&gt;$escapetool.xml($doc.displayPrettyName('status', false, false))&lt;/label&gt;
+      : $doc.display('status')
+      ; &lt;label for="InitiativeCode.InitiativeClass_0_launchDate"&gt;$escapetool.xml($doc.displayPrettyName('launchDate', false, false))&lt;/label&gt;
+      : $doc.display('launchDate')
+      ; &lt;label for="InitiativeCode.InitiativeClass_0_recognized"&gt;$escapetool.xml($doc.displayPrettyName('recognized', false, false))&lt;/label&gt;
+      : $doc.display('recognized')
+      )))
+    )))
+  )))
+  ## the sector field is a fake field, I added it in the class only to be able to draw a proper global initiatives livetable and especially to make a filter fast on this field without making a custom results. Should be removed in the future and replaced with a computed field
+  ## display a hidden sector field here, only if not empty, and fill it in with current sector so that it gets saved in the initiative
+  #if("$!initiativeObject.getProperty('sector').value" == '' &amp;&amp; $xcontext.display == 'edit')
+    #set($currentSectorDoc = $NULL)
+    #foreach($spRef in $doc.documentReference.spaceReferences)
+      #set($parentDoc = $xwiki.getDocument($services.model.createDocumentReference('WebHome', $spRef)))
+      #if ("$!currentSectorDoc" == '' &amp;&amp; $parentDoc.getObject('SectorCode.SectorClass'))
+        #set($currentSectorDoc = $parentDoc)
+      #end
+    #end
+    #if ($currentSectorDoc)
+      #set($discard = $initiativeObject.set('sector', $currentSectorDoc.space))
+      $doc.displayHidden($initiativeClass.sector, "${initiativeClass.name}_${initiativeObject.number}_", $initiativeObject)
+    #end
+  #end
+  ## continue with the content field, page wide
+  (%class="clearfloats"%)((()))
+  #if ($xcontext.display == 'edit')
+    ; &lt;label for="InitiativeCode.InitiativeClass_0_details"&gt;$escapetool.xml($doc.displayPrettyName('details', false, false))&lt;/label&gt;
+    : $doc.display('details')
+  #else
+    (%class="initiative-content"%)((($doc.display('details'))))
+  #end
+  ## at the end of the form, and only in edit mode, display the progress of the initiative filling in
+  #if($xcontext.action == 'edit')
+    ; &lt;label for="InitiativeCode.InitiativeClass_0_progress"&gt;$escapetool.xml($doc.displayPrettyName('progress', false, false))&lt;/label&gt;
+    : $doc.display('progress')
+  #end
+)))
+{{/html}}
+{{/velocity}}</content>
+</xwikidoc>

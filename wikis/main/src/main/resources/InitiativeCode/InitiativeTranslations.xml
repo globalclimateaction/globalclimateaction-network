@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="InitiativeCode.InitiativeTranslations" locale="">
+  <web>InitiativeCode</web>
+  <name>InitiativeTranslations</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent>InitiativeClass</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.TranslationDocumentClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>1</number>
+        <prettyName>Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <name>InitiativeCode.InitiativeTranslations</name>
+    <number>0</number>
+    <className>XWiki.TranslationDocumentClass</className>
+    <guid>76aebf4f-1266-4a49-8727-10ec594ef110</guid>
+    <property>
+      <scope>WIKI</scope>
+    </property>
+  </object>
+  <content># Class fields
+InitiativeCode.InitiativeClass_name=Name
+InitiativeCode.InitiativeClass_leadingOrganisations=Leading Organisations
+InitiativeCode.InitiativeClass_organisations=Organisations
+InitiativeCode.InitiativeClass_focalPoint=Focal Point
+InitiativeCode.InitiativeClass_leader=Initiative Leader
+InitiativeCode.InitiativeClass_description=Description
+InitiativeCode.InitiativeClass_website=Website
+InitiativeCode.InitiativeClass_launchDate=Launch date
+InitiativeCode.InitiativeClass_status=Status
+InitiativeCode.InitiativeClass_status_announced=Announced
+InitiativeCode.InitiativeClass_status_inactive=Inactive
+InitiativeCode.InitiativeClass_status_cancelled=Cancelled
+InitiativeCode.InitiativeClass_status_started=Started
+InitiativeCode.InitiativeClass_status_finished=Finished
+InitiativeCode.InitiativeClass_recognized=GCAA Recognized
+InitiativeCode.InitiativeClass_details=More Info
+InitiativeCode.InitiativeClass_regions=Activity Zone: Region(s)
+InitiativeCode.InitiativeClass_countries=Activity Zone: Country(ies)
+InitiativeCode.InitiativeClass_progress=Progress
+InitiativeCode.InitiativeClass_progress_1_objectives=Short and long-term objectives
+InitiativeCode.InitiativeClass_progress_2_roadmap=Roadmap and work plan
+InitiativeCode.InitiativeClass_progress_3_tracking=Tracking progress
+InitiativeCode.InitiativeClass_progress_4_progress=Progress since the start of the initiative
+InitiativeCode.InitiativeClass_progress_5_impact=Achieved impact and outcomes
+InitiativeCode.InitiativeClass_progress_6_reporting=Publically available reporting
+InitiativeCode.InitiativeClass_progress_7_successes=Success stories
+InitiativeCode.InitiativeClass_progress_8_join=Joining the initiative
+
+# Live table generic keys
+initiative.livetable.doc.title=Name
+initiative.livetable.doc.name=Page name
+initiative.livetable.doc.space=Space
+initiative.livetable.doc.fullname=Page full name
+initiative.livetable.doc.author=Last Author
+initiative.livetable.doc.creator=Creator
+initiative.livetable.doc.date=Update date
+initiative.livetable.doc.creationDate=Creation date
+initiative.livetable.doc.location=Location
+initiative.livetable._avatar=Avatar
+initiative.livetable._images=Images
+initiative.livetable._attachments=Attachments
+initiative.livetable._actions=Actions
+initiative.livetable._actions.edit=Edit
+initiative.livetable._actions.delete=Delete
+initiative.livetable.emptyvalue=-
+
+# Live table specific keys
+initiative.livetable.name=Name
+initiative.livetable.leadingOrganisations=Leading Organisations
+initiative.livetable.organisations=Organisations
+initiative.livetable.focalPoint=Focal Point
+initiative.livetable.leader=Initiative Leader
+initiative.livetable.description=Description
+initiative.livetable.website=Website
+initiative.livetable.launchDate=Launch date
+initiative.livetable.status=Status
+initiative.livetable.recognized=GCAA Recognized
+initiative.livetable.details=Details
+initiative.livetable.sector=Sector
+initiative.livetable.regions=Activity Zone: Region(s)
+initiative.livetable.countries=Activity Zone: Country(ies)
+initiative.livetable.progress=Progress
+
+initiative.dataSpace.title=Data
+initiatives.home.title=Initiatives
+initiatives.create.title=Add a new initiative
+initiatives.create.hint=Name of the new initiative
+initiatives.create.label=Create a new initiative</content>
+</xwikidoc>

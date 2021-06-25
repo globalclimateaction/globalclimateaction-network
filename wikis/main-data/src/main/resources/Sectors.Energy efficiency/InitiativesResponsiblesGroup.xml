@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xwikidoc reference="Sectors.Energy efficiency.InitiativesResponsiblesGroup" locale="">
+  <web>Sectors.Energy efficiency</web>
+  <name>InitiativesResponsiblesGroup</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent>Sectors.Agriculture.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>$doc.documentReference.lastSpaceReference.name Initiatives Responsibles Group</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.XWikiGroups</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <member>
+        <disabled>0</disabled>
+        <name>member</name>
+        <number>1</number>
+        <prettyName>Member</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </member>
+    </class>
+    <name>Sectors.Energy efficiency.InitiativesResponsiblesGroup</name>
+    <number>0</number>
+    <className>XWiki.XWikiGroups</className>
+    <guid>03851dfb-96be-49ad-b70b-45ee3d77ff2a</guid>
+    <property>
+      <member/>
+    </property>
+  </object>
+  <content> </content>
+</xwikidoc>

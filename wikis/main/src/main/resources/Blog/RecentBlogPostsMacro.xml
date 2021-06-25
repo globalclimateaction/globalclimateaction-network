@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="Blog.RecentBlogPostsMacro" locale="">
+  <web>Blog</web>
+  <name>RecentBlogPostsMacro</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>Blog.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>2a2d5e1f-e3ca-447e-900f-ea0caa7f4cad</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>#template('colorThemeInit.vm')
+
+.recentblogpostsmacro .recentblogposts-list ul {
+  margin-left: 0;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.recentblogpostsmacro .recentblogposts-list ul li {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.recentblogpostsmacro .recentblogposts-list ul li:first-of-type {
+  margin-top: 0;
+}
+
+.recentblogpostsmacro .recentblogposts-list ul li:last-of-type {
+  margin-bottom: 0;
+}
+
+.recentblogpostsmacro .recentblogposts-list .recentblogpost-details,
+.recentblogpostsmacro .recentblogposts-list .recentblogpost-readlink {
+  display: block;
+  font-size: 85%;
+  color: $theme.textSecondaryColor;
+}</code>
+    </property>
+    <property>
+      <contentType>CSS</contentType>
+    </property>
+    <property>
+      <name>Style for the recent blog posts</name>
+    </property>
+    <property>
+      <parse>1</parse>
+    </property>
+    <property>
+      <use>onDemand</use>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <code>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>code</name>
+        <number>9</number>
+        <picker>0</picker>
+        <prettyName>Macro code</prettyName>
+        <rows>20</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentDescription>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>contentDescription</name>
+        <number>8</number>
+        <picker>0</picker>
+        <prettyName>Content description (Not applicable for "No content" type)</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </contentDescription>
+      <contentType>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>7</number>
+        <picker>0</picker>
+        <prettyName>Macro content type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>Optional|Mandatory|No content</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <defaultCategory>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultCategory</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Default category</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultCategory>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>Macro description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <id>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>id</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Macro id</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </id>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Macro name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <supportsInlineMode>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>supportsInlineMode</name>
+        <number>5</number>
+        <prettyName>Supports inline mode</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </supportsInlineMode>
+      <visibility>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>visibility</name>
+        <number>6</number>
+        <picker>0</picker>
+        <prettyName>Macro visibility</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator>|</separator>
+        <separators>|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>Current User|Current Wiki|Global</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </visibility>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroClass</className>
+    <guid>6d3a1e47-54b7-4caf-b124-d052c9ff6b39</guid>
+    <property>
+      <code>{{include document="Blog.BlogCode"/}}
+
+{{velocity}}
+#set($discard = $xwiki.ssx.use("$xcontext.macro.doc"))
+(%class="recentblogpostsmacro"%)(((
+#set($postsNumber = $xcontext.macro.params.get('entries'))
+#set($displayCreateForm = $xcontext.macro.params.displayCreateForm)
+## find out what information to display about the blog post
+#set($detailsToDisplay = [])
+#foreach($dString in $xcontext.macro.params.displayPostDetails.split(','))
+  #set($discard = $detailsToDisplay.add($dString.trim()))
+#end
+## find out the date format that should be used
+#set($entryDateFormat = "$!xcontext.macro.params.dateFormat")
+#if ($entryDateFormat == '')
+  ## if parameter is unset, set to null to fallback on default
+  #set($entryDateFormat = $NULL)
+#end
+## whether the "Read More" link to the article should be on the title or in a separate link
+#set($linkOnTitle = true)
+#if("$!xcontext.macro.params.explicitMoreLink" == 'true')
+  #set($linkOnTitle = false)
+#end
+## the blog for which we should display the articles (multiple blogs can be present in the wiki)
+#set($blog = 'Blog.WebHome')
+#if ("$!xcontext.macro.params.blog" != '')
+  #set($blog = "$!xcontext.macro.params.blog")
+#end
+## Proceed with obtaining the blog entries and displaying
+#getBlogEntriesBaseQuery($entriesQuery)
+#set($entriesQueryParams = [])
+#set($blogDoc = $xwiki.getDocument($blog))
+#isBlogGlobal($blogDoc, $isGlobal)
+#if(!$isGlobal)
+  ## this query production is copied from the #getBlogEntries macro from BlogCode, I reused exactly the same
+  #set($entriesQuery = "${entriesQuery} and (doc.space = ? or doc.parent = ?)")
+  #set($entriesQueryParams = ["$!{blogDoc.space}", "$!{blogDoc.fullName}"])
+#end
+## make the query and display the entries
+#set($recentEntriesPreparedQuery = $services.query.hql("${entriesQuery} order by publishDate.value desc"))
+#if ($entriesQueryParams.size() &gt; 0)
+  #set($recentEntriesPreparedQuery = $recentEntriesPreparedQuery.bindValues($entriesQueryParams))
+#end
+#set($recentEntries = $recentEntriesPreparedQuery.setLimit($postsNumber).setOffset(0).execute())
+#if($recentEntries.size() &gt; 0)
+  (%class="recentblogposts-list"%)((( {{html clean="false"}}
+  &lt;ul&gt;
+  #foreach($entryDoc in $xwiki.wrapDocs($recentEntries))
+    #getEntryObject($entryDoc $entryObj)
+    #set($blogEntryLink = $xwiki.getURL($entryDoc.documentReference))
+    &lt;li&gt;
+      &lt;span class="recentblogpost-title"&gt;
+      #if($linkOnTitle)&lt;a href="$escapetool.xml($blogEntryLink)"&gt;#end$entryDoc.displayTitle#if($linkOnTitle)&lt;/a&gt;#end
+      &lt;/span&gt;
+      #if($detailsToDisplay.size() &gt; 0)
+        &lt;span class="recentblogpost-details"&gt;
+        #foreach($dToDisplay in $detailsToDisplay)
+          #if ($dToDisplay == 'author') $services.localization.render('xe.blog.code.postedby') $xwiki.getUserName($entryDoc.creator)#end
+          #if ($dToDisplay == 'date') $services.localization.render('on') $xwiki.formatDate($entryObj.getProperty('publishDate').value, $entryDateFormat)#end
+          #if ($dToDisplay == 'category')
+            #set($categories = $entryObj.getProperty('category').value)
+            #set($blogCategoryClassname = 'Blog.CategoryClass')
+            #if($categories.size() &gt; 0)
+              #foreach($category in $categories) #set($categoryDoc = $!xwiki.getDocument($category))
+                #if(!$categoryDoc.isNew() &amp;&amp; $categoryDoc.getObject(${blogCategoryClassname}))
+                  #if($foreach.count == 1) $services.localization.render('xe.blog.code.in') ##
+                  #else
+                    , ##
+                  #end##
+                  &lt;a href="$escapetool.xml($categoryDoc.getURL())"&gt;$!categoryDoc.getObject($blogCategoryClassname).getValue('name')&lt;/a&gt;##
+                #end##
+              #end##
+            #end
+          #end
+        #end
+        &lt;/span&gt;
+      #end
+      #if(!$linkOnTitle)
+        &lt;span class="recentblogpost-readlink"&gt;&lt;a href="$escapetool.xml($blogEntryLink)"&gt;$services.localization.render('xe.blog.code.readpost')&lt;/a&gt;&lt;/span&gt;
+      #end
+    &lt;/li&gt;
+  #end
+  &lt;/ul&gt;
+  {{/html}})))
+#end
+
+#if($displayCreateForm == "true")
+  (%class="recentblogposts-newpostform"%)(((
+  {{include document="Blog.CreatePost" context="new" /}}
+  )))
+#end
+)))
+{{/velocity}}</code>
+    </property>
+    <property>
+      <contentDescription/>
+    </property>
+    <property>
+      <contentType>No content</contentType>
+    </property>
+    <property>
+      <defaultCategory>News</defaultCategory>
+    </property>
+    <property>
+      <description>Displays the list of recent blog posts</description>
+    </property>
+    <property>
+      <id>recentblogposts</id>
+    </property>
+    <property>
+      <name>Recent Blog Posts</name>
+    </property>
+    <property>
+      <supportsInlineMode>0</supportsInlineMode>
+    </property>
+    <property>
+      <visibility>Current Wiki</visibility>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>0</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>8463be83-63de-41e6-a247-e286572ad3cd</guid>
+    <property>
+      <defaultValue>10</defaultValue>
+    </property>
+    <property>
+      <description>Number of blog posts to display.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>entries</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>1</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>dd247ae0-ae0b-4157-8133-f06ffaae82f0</guid>
+    <property>
+      <defaultValue>false</defaultValue>
+    </property>
+    <property>
+      <description>Controls whether a link to the create form is to be displayed or not. If the form will be displayed, the new blog post will be created in the "Blog" space, even if the "blog" parameter is filled in with a different blog.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>displayCreateForm</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>2</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>123d554d-b8af-419a-8fae-3fd5b6ffb49d</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The details of the blog post that should be displayed, and in which order. The value is a comma separated list of items between: "author", "date" and "category". E.g. "author,category,date" will result in something like "Posted by &lt;user&gt; in &lt;category&gt; on &lt;date&gt;". For phrasing reasons, "author" should be first, if mentioned.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>displayPostDetails</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>3</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>dca798e7-cc76-44ec-ae8c-738a1f3803f3</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>Whether the link to read the article should be explicit, not on the title of the article. Possible values: "true" and "false" (default). If the link is explicit, the title of the article will not have a link at all anymore.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>explicitMoreLink</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>4</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>6e51e41e-f989-4b8a-84f6-cd40ce1dbd64</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The blog for which to display the recent entries, if there are multiple blogs on this wiki. Must have an object of type "BlogClass", which will be used to know what kind of blog it is. Please note that the parameter displayCreateForm will not work, though, with another blog than the default one. By default, the entries of blog Blog.WebHome are displayed.</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>blog</name>
+    </property>
+  </object>
+  <object>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <picker>0</picker>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>Text</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <customDisplay/>
+        <defaultValue/>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+    </class>
+    <name>Blog.RecentBlogPostsMacro</name>
+    <number>5</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>ba5d0883-077e-40bb-ae14-f64b30f9e6f5</guid>
+    <property>
+      <defaultValue/>
+    </property>
+    <property>
+      <description>The format of the date of the blog post, if it has to be displayed</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>dateFormat</name>
+    </property>
+  </object>
+  <content>{{recentblogposts displayCreateForm="true" displayPostDetails="author,date,category" dateFormat='dd MMM yyyy'/}}</content>
+</xwikidoc>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xwikidoc reference="Geo.008" locale="">
+  <web>Geo</web>
+  <name>008</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>Albania</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <object>
+    <class>
+      <name>Geo.Code.CountryClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <name>
+        <customDisplay>{{include document="AppWithinMinutes.Title" /}}</customDisplay>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>name</prettyName>
+        <script/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.ComputedFieldClass</classType>
+      </name>
+    </class>
+    <name>Geo.008</name>
+    <number>0</number>
+    <className>Geo.Code.CountryClass</className>
+    <guid>da3805f8-7af6-4552-80b4-31de63718d97</guid>
+  </object>
+  <content/>
+</xwikidoc>

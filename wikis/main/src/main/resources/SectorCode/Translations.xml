@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="SectorCode.Translations" locale="">
+  <web>SectorCode</web>
+  <name>Translations</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent/>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.TranslationDocumentClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>1</number>
+        <prettyName>Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <name>SectorCode.Translations</name>
+    <number>0</number>
+    <className>XWiki.TranslationDocumentClass</className>
+    <guid>d9693abb-57f2-46fc-bfa6-43f3384d44ab</guid>
+    <property>
+      <scope>WIKI</scope>
+    </property>
+  </object>
+  <content>sector.home.Context.title=Context
+sector.home.QuickWins.title=Quick Wins
+sector.home.Roadmap.title=Roadmap
+sector.home.QuickWins.readmore=Read more
+sector.home.Context.readmore=Read more
+sector.home.Roadmap.readmore=Read more
+
+sector.home.blog.title={0} Blog
+sector.home.initiatives.title=Spotlight on Initiatives
+sector.home.agenda.title={0} Events
+sector.home.blog.readmore=More blog posts
+sector.home.initiatives.readmore=More initiatives
+sector.home.agenda.readmore=More events
+sectors.home.title=Sectors
+sectors.home.table.doc.title=Sector
+sectors.home.table.facilitator=Facilitator
+sectors.home.table.doc.creationDate=Creation date
+sectors.home.table.description=Description
+sectors.home.table.emptyvalue=
+
+sector.menu.presentation=Presentation
+sector.menu.blog=Blog
+sector.menu.initiatives=Initiatives
+sector.menu.kb=Knowledge Base
+sector.menu.agenda=Agenda
+sector.menu.forum=Forum
+sector.menu.groups=Sector participants
+sector.menu.groups.SectorEditorsGroup=Sector editors
+sector.menu.groups.SectorResponsiblesGroup=Sector responsibles
+sector.menu.groups.InitiativesResponsiblesGroup=Initiatives responsibles
+sector.menu.newuser=Create a new user
+
+SectorCode.SectorClass_name=Name
+SectorCode.SectorClass_Context=Context (summary)
+SectorCode.SectorClass_Roadmap=Roadmap (summary)
+SectorCode.SectorClass_QuickWins=Quick Wins (summary)
+SectorCode.SectorClass_description=Short description
+SectorCode.SectorClass_facilitator=Facilitator
+SectorCode.SectorClass_banner=Top banner</content>
+</xwikidoc>

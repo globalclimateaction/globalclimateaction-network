@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="Code.MainHomeSheet" locale="">
+  <web>Code</web>
+  <name>MainHomeSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>Code.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>$services.localization.render('home.title')</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity}}
+## don't display doc extra at all (this means hiding document footer as well, tags &amp; created by)
+#set($displayDocExtra = false)
+## display content menu only to admins
+#if(!$hasAdmin)
+  #set($displayContentMenu = false)
+#end
+#set($discard = $xwiki.ssx.use('Code.ColumnsHomeCSS'))
+{{titlebanner image='Code.Skin@homebanner.jpg' title="$doc.title" /}}
+
+(%class="row gcaa-bottom-row"%)(((
+(%class="col-xs-12 col-sm-4 column-blog"%)(((
+=$services.localization.render('home.blog.title')=
+{{recentblogposts displayPostDetails="author,date,category" entries="5" explicitMoreLink="true" dateFormat='dd MMM yyyy' /}}
+
+(%class="readmore"%)((([[$services.icon.render('right') $services.localization.render('home.blog.more')&gt;&gt;Blog.WebHome]])))
+)))
+(%class="col-xs-12 col-sm-4 column-initiatives"%)(((
+=$services.localization.render('home.initiatives.title')=
+{{initiatives columns="doc.title,doc.date" location="Initiatives." selectedColumn="doc.date" defaultOrder='desc' rowCount='5'/}}
+
+(%class="readmore"%)((([[$services.icon.render('right') $services.localization.render('home.initiatives.more')&gt;&gt;Initiatives.WebHome]])))
+)))
+(%class="col-xs-12 col-sm-4 column-agenda"%)(((
+=$services.localization.render('home.agenda.title')=
+{{nextevents filter="page" calendarDoc="Agenda.WebHome" count="5" /}}
+
+(%class="readmore"%)((([[$services.icon.render('right') $services.localization.render('home.agenda.more')&gt;&gt;Agenda.WebHome]])))
+)))
+)))
+{{/velocity}}</content>
+</xwikidoc>

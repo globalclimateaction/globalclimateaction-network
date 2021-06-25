@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="OrganisationCode.OrganisationTranslations" locale="">
+  <web>OrganisationCode</web>
+  <name>OrganisationTranslations</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent/>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1451602800000</creationDate>
+  <date>1451602800000</date>
+  <contentUpdateDate>1451602800000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.TranslationDocumentClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>1</number>
+        <prettyName>Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <name>OrganisationCode.OrganisationTranslations</name>
+    <number>0</number>
+    <className>XWiki.TranslationDocumentClass</className>
+    <guid>e9808daf-b4d2-4570-8b15-036457e8948f</guid>
+    <property>
+      <scope>WIKI</scope>
+    </property>
+  </object>
+  <content># Class fields
+OrganisationCode.OrganisationClass_name=Name
+OrganisationCode.OrganisationClass_description=Description
+OrganisationCode.OrganisationClass_keyContacts=Key Contacts
+OrganisationCode.OrganisationClass_users=Users
+OrganisationCode.OrganisationClass_regions=Regions
+OrganisationCode.OrganisationClass_countries=Countries
+OrganisationCode.OrganisationClass_logo=Logo
+OrganisationCode.OrganisationClass_type=Type
+OrganisationCode.OrganisationClass_parentOrganisation=Parent Organisation
+
+# Live table generic keys
+organisation.livetable.doc.title=Name
+organisation.livetable._attachments=Attachments
+organisation.livetable._actions=Actions
+organisation.livetable._actions.edit=Edit
+organisation.livetable._actions.delete=Delete
+organisation.livetable.type=Type
+organisation.livetable.emptyvalue=-
+
+# Sheet
+organisation.sheet.livetable.doc.title=Initiative
+organisation.sheet.livetable.sector=Sector
+organisations.sheet.initiatives.leadingOganisations=Initiatives the Organisation is leading
+organisations.sheet.initiatives.organisations=Initiatives the Organisation is involved in
+organisations.sheet.users=Users involved in the Organisation
+organisation.sheet.livetable._avatar=
+organisation.sheet.livetable.first_name=First Name
+organisation.sheet.livetable.last_name=Last Name
+
+organisation.dataSpace.title=Data
+organisations.home.title=Organisations
+organisations.create.title=Add a new organisation
+organisations.create.hint=Name of the new organisation
+organisations.create.label=Create a new organisation</content>
+</xwikidoc>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="SectorCode.SectorViewSheet" locale="">
+  <web>SectorCode</web>
+  <name>SectorViewSheet</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>xwiki:SectorCode.SectorClass</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity}}
+## hide the bottom tabs
+#set($showcomments = false)
+#set($showattachments = false)
+#set($showhistory = false)
+#set($showinformation = false)
+#set($discard = $xwiki.ssx.use('Code.ColumnsHomeCSS'))
+## get the sector object
+#set($sectorObject = $doc.getObject('SectorCode.SectorClass'))
+## Display the sector image, if any
+#set($sectorImage = $sectorObject.getProperty('banner').value)
+## to do: escape the description text parameter to not be sorry later
+{{titlebanner image='$!sectorImage' title="$doc.title" subtitle="$sectorObject.getProperty('description').value.trim()" /}}
+
+## and generate the columns under
+(%class="row gcaa-top-row"%)(((
+## the properties have the same name as the full page containing the extra info
+#foreach($p in ['Context', 'Roadmap', 'QuickWins'])
+  (%class="col-xs-12 col-sm-4 sector-info"%)(((
+  =$services.localization.render("sector.home.${p}.title")=
+  $doc.display($p, $sectorObject)
+  (%class="readmore"%)((([[$services.localization.render("sector.home.${p}.readmore")&gt;&gt;$p]])))
+)))
+#end
+)))
+(%class="clearfloats"%)((()))
+
+(%class="row gcaa-bottom-row"%)(((
+  (%class="col-xs-12 col-sm-4 column-blog"%)(((
+  =$services.localization.render('sector.home.blog.title', ["$doc.title"])=
+  {{recentblogposts blog="${doc.space}.Blog.WebHome" displayPostDetails="author,date,category" entries="5" explicitMoreLink="true" dateFormat='dd MMM yyyy'/}}
+
+  (%class="readmore"%)((([[$services.icon.render('right') $services.localization.render("sector.home.blog.readmore")&gt;&gt;Blog]])))
+  )))
+  (%class="col-xs-12 col-sm-4 column-intiatives"%)(((
+  =$services.localization.render('sector.home.initiatives.title', ["$doc.title"])=
+  {{initiatives columns="doc.title, doc.date" location="${doc.space}.Initiatives" selectedColumn="doc.date" defaultOrder='desc' rowCount='5' /}}
+
+  (%class="readmore"%)((([[$services.icon.render('right') $services.localization.render("sector.home.initiatives.readmore")&gt;&gt;Initiatives]])))
+  )))
+  (%class="col-xs-12 col-sm-4 column-agenda"%)(((
+  =$services.localization.render('sector.home.agenda.title', ["$doc.title"])=
+  {{nextevents filter="page" calendarDoc="${doc.space}.Agenda.WebHome" count="5" /}}
+
+  (%class="readmore"%)((([[$services.icon.render('right') $services.localization.render("sector.home.agenda.readmore")&gt;&gt;Agenda]])))
+  )))
+)))
+{{/velocity}}</content>
+</xwikidoc>

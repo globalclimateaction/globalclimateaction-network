@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="Main.About.FAQ.WebHome" locale="">
+  <web>Main.About.FAQ</web>
+  <name>WebHome</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent>Main.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>FAQ</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <content>{{toc depth="1"/}}
+
+----
+
+= How to add a frequently asked question on the FAQ page? =
+
+For adding a new FAQ, follow these steps:
+
+* Edit the FAQ page using the pencil button in the top right corner of the page, next to the page title, below the orange menu (if you cannot see this menu, then this item of the FAQ does not concern you). 
+* Then, in the content of the page, add the question and then format it using a "Heading 1" style - in the editor's menus, in the drop-down saying "Format", choose Heading 1 after having positioned the caret on the line containing the question. This heading 1 formatting will make the question automatically pop in the index of questions displayed at the top of the FAQ page.
+* Below this heading 1, add the answer as a normal text. You can use images and all sort of formatting, as long as you don't add another heading level 1 (heading level 2 or lower are accepted), because the headings level 1 will "break" the current question and display as a new question.
+* For a better separation between the questions, you can use a horizontal line at the end of the question's answer. 
+
+----
+
+ </content>
+</xwikidoc>

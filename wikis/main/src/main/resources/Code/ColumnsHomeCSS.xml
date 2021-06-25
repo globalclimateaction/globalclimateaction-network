@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="Code.ColumnsHomeCSS" locale="">
+  <web>Code</web>
+  <name>ColumnsHomeCSS</name>
+  <language/>
+  <defaultLanguage/>
+  <translation>0</translation>
+  <parent>Main.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>ColumnsHomeCSS</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.StyleSheetExtension</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <cache>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>cache</name>
+        <number>6</number>
+        <prettyName>Caching policy</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>long|short|default|forbid</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </cache>
+      <code>
+        <disabled>0</disabled>
+        <editor>PureText</editor>
+        <name>code</name>
+        <number>3</number>
+        <prettyName>Code</prettyName>
+        <rows>20</rows>
+        <size>50</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </code>
+      <contentType>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>contentType</name>
+        <number>1</number>
+        <prettyName>Content Type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>CSS|LESS</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </contentType>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>2</number>
+        <prettyName>Name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <parse>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>parse</name>
+        <number>5</number>
+        <prettyName>Parse content</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </parse>
+      <use>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>use</name>
+        <number>4</number>
+        <prettyName>Use this extension</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>currentPage|onDemand|always</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </use>
+    </class>
+    <name>Code.ColumnsHomeCSS</name>
+    <number>0</number>
+    <className>XWiki.StyleSheetExtension</className>
+    <guid>65774716-3ef9-4932-a931-8fe4e626db1c</guid>
+    <property>
+      <cache>long</cache>
+    </property>
+    <property>
+      <code>/*
+ * Removing breadcrumbs
+ */
+.breadcrumb {
+  display: none;
+}
+
+/*
+ * Cancelling a stupid rule from livetable.css which breaks livetable alignment
+ */
+.xwiki-livetable td.xwiki-livetable-display-container {
+  padding-left: 0;
+}
+
+/*
+ * Only present in sector homes, Context, Roadmap, Quick Wins area
+ */
+.gcaa-top-row {
+  .sector-info {
+    text-align: justify;
+  }
+  .readmore p a {
+    color: @gcaa-orange;
+    font-weight: bold;
+  }
+}
+
+.gcaa-bottom-row {
+  /* Increase margin only for blog and agenda titles and bottom margins because the livetable has the pagination which gives the impression of more space */
+  &amp; .column-blog, &amp; .column-agenda {
+    h1 {
+      margin-bottom: 20px;
+    }
+    .readmore {
+      margin-top: 15px;
+    }
+  }
+
+  /* Read more links in the blog gadget will be orange */
+  .column-blog .recentblogpost-readlink a {
+    color: @gcaa-orange;
+  }
+}
+
+/*
+ * Style the read more links 
+ */
+.gcaa-bottom-row {
+  .readmore p a {
+    display: block;
+    background-color: @well-bg;
+    font-weight: bold;
+    &amp;:hover {
+      text-decoration: none;
+      box-shadow: 2px 2px 2px 0px darken(@well-bg, 10%);
+    }
+    span.fa {
+      background-color: @link-color;
+      color: @xwiki-page-content-bg;
+      display: inline-block;
+      margin-right: 15px;
+      text-align: center;
+    }
+  }
+  /* I have no idea how to set these sizes to make the text nicely centered vertically and also to make it size nicely when increasing zoom */
+  .readmore p a {
+    line-height: 3em;
+    font-size: 0.9em;
+    span.fa {
+      min-width: 2.7em;
+      line-height: 2.7em;
+      font-size: 1.2em;
+    }
+  }
+}</code>
+    </property>
+    <property>
+      <contentType>LESS</contentType>
+    </property>
+    <property>
+      <name/>
+    </property>
+    <property>
+      <parse/>
+    </property>
+    <property>
+      <use>currentPage</use>
+    </property>
+  </object>
+  <content/>
+</xwikidoc>

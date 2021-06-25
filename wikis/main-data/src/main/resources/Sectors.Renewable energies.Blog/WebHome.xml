@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xwikidoc reference="Sectors.Renewable energies.Blog.WebHome" locale="">
+  <web>Sectors.Renewable energies.Blog</web>
+  <name>WebHome</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent>SectorCode.TemplateSector.WebHome</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title>$services.localization.render('xe.blog.code.title')</title>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>false</hidden>
+  <object>
+    <class>
+      <name>Blog.BlogClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <blogType>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>blogType</name>
+        <number>5</number>
+        <picker>0</picker>
+        <prettyName>Blog type</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <tooltip/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>local=Space blog (aggregates posts from its space only)|global=Global blog (aggregates posts from the entire wiki)</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </blogType>
+      <description>
+        <contenttype>FullyRenderedText</contenttype>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <editor>---</editor>
+        <name>description</name>
+        <number>2</number>
+        <picker>0</picker>
+        <prettyName>Description</prettyName>
+        <rows>5</rows>
+        <size>60</size>
+        <tooltip/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <displayType>
+        <cache>0</cache>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>displayType</name>
+        <number>3</number>
+        <picker>0</picker>
+        <prettyName>Index display</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators> ,|</separators>
+        <size>1</size>
+        <sort>none</sort>
+        <tooltip/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <values>paginated=Paginated|weekly=Group posts weekly|monthly=Group posts monthly|all=Show all posts</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </displayType>
+      <itemsPerPage>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>itemsPerPage</name>
+        <number>4</number>
+        <numberType>integer</numberType>
+        <prettyName>Items per page (only in the Paginated display mode)</prettyName>
+        <size>2</size>
+        <tooltip/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </itemsPerPage>
+      <title>
+        <customDisplay/>
+        <disabled>0</disabled>
+        <name>title</name>
+        <number>1</number>
+        <picker>0</picker>
+        <prettyName>Blog title</prettyName>
+        <size>30</size>
+        <tooltip/>
+        <unmodifiable>0</unmodifiable>
+        <validationMessage/>
+        <validationRegExp/>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </title>
+    </class>
+    <name>Sectors.Renewable energies.Blog.WebHome</name>
+    <number>0</number>
+    <className>Blog.BlogClass</className>
+    <guid>a4a32fb3-4eca-4c3a-99a5-d0a36b99b5bf</guid>
+    <property>
+      <blogType>local</blogType>
+    </property>
+    <property>
+      <description/>
+    </property>
+    <property>
+      <displayType>paginated</displayType>
+    </property>
+    <property>
+      <itemsPerPage/>
+    </property>
+    <property>
+      <title>Blog</title>
+    </property>
+  </object>
+  <content> </content>
+</xwikidoc>

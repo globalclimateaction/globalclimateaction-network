@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation; either version 2.1 of
+ * the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this software; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+-->
+
+<xwikidoc reference="MoccaCalendar.MoccaCalendarTranslations" locale="">
+  <web>MoccaCalendar</web>
+  <name>MoccaCalendarTranslations</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <parent>MoccaCalendarClass</parent>
+  <creator>xwiki:XWiki.Admin</creator>
+  <author>xwiki:XWiki.Admin</author>
+  <customClass/>
+  <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
+  <creationDate>1476655200000</creationDate>
+  <date>1476655200000</date>
+  <contentUpdateDate>1476655200000</contentUpdateDate>
+  <version>1.1</version>
+  <title/>
+  <defaultTemplate/>
+  <validationScript/>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <object>
+    <class>
+      <name>XWiki.TranslationDocumentClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <scope>
+        <cache>0</cache>
+        <disabled>0</disabled>
+        <displayType>select</displayType>
+        <multiSelect>0</multiSelect>
+        <name>scope</name>
+        <number>1</number>
+        <prettyName>Scope</prettyName>
+        <relationalStorage>0</relationalStorage>
+        <separator> </separator>
+        <separators>|, </separators>
+        <size>1</size>
+        <unmodifiable>0</unmodifiable>
+        <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
+        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
+      </scope>
+    </class>
+    <name>MoccaCalendar.MoccaCalendarTranslations</name>
+    <number>0</number>
+    <className>XWiki.TranslationDocumentClass</className>
+    <guid>f5d1be7a-4a54-44f5-b263-4bc248308297</guid>
+    <property>
+      <scope>WIKI</scope>
+    </property>
+  </object>
+  <content>#general
+MoccaCalendar.calendar=Calendar
+MoccaCalendar.calendar.title=Calendar
+MoccaCalendar.calendar.defaultCalendarTitle=Other Events
+MoccaCalendar.calendar.viewall=Overview of all calendars
+MoccaCalendar.calendar.create=Create new calendar
+MoccaCalendar.calendar.plainlist=agenda
+MoccaCalendar.calendar.plainlist.titlepast=Past Events
+MoccaCalendar.calendar.plainlist.titleupcoming=Upcoming Events
+MoccaCalendar.calendar.plainlist.nopastevents=No past events found.
+MoccaCalendar.calendar.plainlist.noupcomingevents=No upcoming events found.
+MoccaCalendar.calendar.firstDayOfWeek=0
+
+MoccaCalendar.calendarevent.viewall=All events
+MoccaCalendar.calendarevent.create=Create new event
+MoccaCalendar.calendarevent.backlink=Back to calendar &amp;#171;{0}&amp;#187;
+MoccaCalendar.calendarevent.confirmDelete=Do you really want to delete the event &amp;#171;{0}&amp;#187; ?
+MoccaCalendar.calendarevent.view=Event
+MoccaCalendar.generic.errormessage=Internal Server Error
+MoccaCalendar.calendar.loaderror=There was an error loading events. Please refresh and, if the error persists, contact your administrator.
+
+# Class fields
+MoccaCalendar.MoccaCalendarClass_title=Title
+MoccaCalendar.MoccaCalendarClass_color=Color of entries in the calendar view
+MoccaCalendar.MoccaCalendarClass_content1=Description
+
+# Live table generic keys
+moccacalendar.livetable.doc.title=Calendar
+moccacalendar.livetable.doc.name=Page name
+moccacalendar.livetable.doc.space=Space
+moccacalendar.livetable.doc.fullname=Page full name
+moccacalendar.livetable.doc.author=Last Author
+moccacalendar.livetable.doc.creator=Creator
+moccacalendar.livetable.doc.date=Update date
+moccacalendar.livetable.doc.creationDate=Creation date
+moccacalendar.livetable._avatar=Avatar
+moccacalendar.livetable._images=Images
+moccacalendar.livetable._attachments=Attachments
+moccacalendar.livetable._actions=Actions
+moccacalendar.livetable._actions.edit=Edit
+moccacalendar.livetable._actions.delete=Delete
+moccacalendar.livetable.emptyvalue=-
+moccacalendar.livetable.title=Title
+moccacalendar.livetable.description=Description
+moccacalendar.livetable.content1=Content
+
+# Mocca Calendar Events keys
+# Class fields
+MoccaCalendar.MoccaCalendarEventClass_title=Title
+MoccaCalendar.MoccaCalendarEventClass_startDate=Start date
+MoccaCalendar.MoccaCalendarEventClass_endDate=End date
+MoccaCalendar.MoccaCalendarEventClass_description=Short description
+MoccaCalendar.MoccaCalendarEventClass_description_more_view=View the event page for more information.
+MoccaCalendar.MoccaCalendarEventClass_description_more_edit=For adding more information, edit the event page (after creation).
+MoccaCalendar.MoccaCalendarEventClass_details=Details
+MoccaCalendar.MoccaCalendarEventClass_allDay=All day
+
+# Event live table generic keys (currently unused)
+moccacalendarevent.livetable.doc.title=Page title
+moccacalendarevent.livetable.doc.name=Page name
+moccacalendarevent.livetable.doc.space=Space
+moccacalendarevent.livetable.doc.fullname=Page full name
+moccacalendarevent.livetable.doc.author=Last Author
+moccacalendarevent.livetable.doc.creator=Creator
+moccacalendarevent.livetable.doc.date=Update date
+moccacalendarevent.livetable.doc.creationDate=Creation date
+moccacalendarevent.livetable._avatar=Avatar
+moccacalendarevent.livetable._images=Images
+moccacalendarevent.livetable._attachments=Attachments
+moccacalendarevent.livetable._actions=Action
+moccacalendarevent.livetable._actions.edit=Edit
+moccacalendarevent.livetable._actions.delete=Delete
+moccacalendarevent.livetable.emptyvalue=-
+
+# Live table specific keys
+moccacalendarevent.livetable.title=Title
+moccacalendarevent.livetable.startDate=Start date
+moccacalendarevent.livetable.endDate=End date
+moccacalendarevent.livetable.description=Description
+
+# validation messages
+val_title_notvalid=Title field contains invalid characters.
+val_title_notempty=Title field is required.
+val_endDate=End date must be after start date.
+val_title_already_exists=An event with this name already exists.</content>
+</xwikidoc>
